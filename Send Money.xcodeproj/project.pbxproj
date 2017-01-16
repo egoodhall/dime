@@ -1,0 +1,784 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 47;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		070333EF1B6DE7280017ED37 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070333EE1B6DE7280017ED37 /* SettingsTableViewController.swift */; };
+		070557E01B5EA93800D84A6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070557DF1B5EA93800D84A6D /* AppDelegate.swift */; };
+		070557E21B5EA93800D84A6D /* ExpenseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070557E11B5EA93800D84A6D /* ExpenseTableViewController.swift */; };
+		070557E41B5EA93800D84A6D /* ReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070557E31B5EA93800D84A6D /* ReportTableViewController.swift */; };
+		070557E71B5EA93800D84A6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070557E51B5EA93800D84A6D /* Main.storyboard */; };
+		070557E91B5EA93800D84A6D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 070557E81B5EA93800D84A6D /* Images.xcassets */; };
+		070557EC1B5EA93800D84A6D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 070557EA1B5EA93800D84A6D /* LaunchScreen.xib */; };
+		070557F81B5EA93800D84A6D /* Send_MoneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070557F71B5EA93800D84A6D /* Send_MoneyTests.swift */; };
+		070558101B5EB3CA00D84A6D /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0705580B1B5EB3CA00D84A6D /* DataTypes.swift */; };
+		070558261B5F696300D84A6D /* NewExpenseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070558251B5F696300D84A6D /* NewExpenseTableViewController.swift */; };
+		071433711D5BB69D0090AE1C /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071433701D5BB69D0090AE1C /* TutorialViewController.swift */; };
+		072557051BA31EEC00A0F4EC /* AFImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072557031BA31EEC00A0F4EC /* AFImageExtension.swift */; };
+		072557061BA31EEC00A0F4EC /* AFImageVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072557041BA31EEC00A0F4EC /* AFImageVIewExtension.swift */; };
+		076B22BA1B6DD0A8004F5DEA /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 076B22B91B6DD0A8004F5DEA /* iAd.framework */; };
+		076DDEA91B71E28400DE5DDB /* ExpenseImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076DDEA81B71E28400DE5DDB /* ExpenseImageViewController.swift */; };
+		077114861B603005009CE662 /* IntermediateNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077114851B603005009CE662 /* IntermediateNavigationController.swift */; };
+		077114881B608E35009CE662 /* CustomExpenseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077114871B608E35009CE662 /* CustomExpenseViewCell.swift */; };
+		0783DA361B695D3100F9E868 /* AddExpensesToReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783DA351B695D3100F9E868 /* AddExpensesToReportController.swift */; };
+		078CBFCD1B818667002BD451 /* TutorialContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078CBFCC1B818667002BD451 /* TutorialContentViewController.swift */; };
+		078CBFCF1B823A84002BD451 /* TutorialRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078CBFCE1B823A84002BD451 /* TutorialRootViewController.swift */; };
+		079443E21B6E9F30000E7FD1 /* DeleteDelayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079443E11B6E9F30000E7FD1 /* DeleteDelayTableViewController.swift */; };
+		07B11C111D37DA3400777CAC /* PTSans.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 07B11C101D37DA3400777CAC /* PTSans.ttc */; };
+		07B11C131D37E12100777CAC /* AnimatedTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B11C121D37E12100777CAC /* AnimatedTutorial.swift */; };
+		07D3C6241B6EB45C00FD80D1 /* EmailListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C6231B6EB45C00FD80D1 /* EmailListTableViewController.swift */; };
+		07E746D61B64089A00961B61 /* OpenReportViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E746D51B64089A00961B61 /* OpenReportViewCell.swift */; };
+		07E746DB1B6424A200961B61 /* SubmittedReportViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E746DA1B6424A200961B61 /* SubmittedReportViewCell.swift */; };
+		07E746DF1B65752E00961B61 /* ReportDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E746DE1B65752E00961B61 /* ReportDetailTableViewController.swift */; };
+		07E746E11B659EC000961B61 /* CustomTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E746E01B659EC000961B61 /* CustomTabViewController.swift */; };
+		07ED62721CF4B1600097BFB8 /* PDFGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ED62711CF4B1600097BFB8 /* PDFGenerator.swift */; };
+		1CDF56F563CB20576C901181 /* Pods_Send_Money.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB77A256319621B21D5FFD26 /* Pods_Send_Money.framework */; };
+		A5688587F487CAA8DCC20E8C /* Pods_Send_MoneyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4597DD64B065C1C096280C43 /* Pods_Send_MoneyTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		070557F21B5EA93800D84A6D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 070557D21B5EA93800D84A6D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 070557D91B5EA93800D84A6D;
+			remoteInfo = "Send Money";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		070558091B5EB30D00D84A6D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		070333EE1B6DE7280017ED37 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		070557DA1B5EA93800D84A6D /* Send Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Send Money.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		070557DE1B5EA93800D84A6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		070557DF1B5EA93800D84A6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		070557E11B5EA93800D84A6D /* ExpenseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTableViewController.swift; sourceTree = "<group>"; };
+		070557E31B5EA93800D84A6D /* ReportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewController.swift; sourceTree = "<group>"; };
+		070557E61B5EA93800D84A6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		070557E81B5EA93800D84A6D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		070557EB1B5EA93800D84A6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		070557F11B5EA93800D84A6D /* Send Money.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Send Money.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		070557F61B5EA93800D84A6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		070557F71B5EA93800D84A6D /* Send_MoneyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Send_MoneyTests.swift; sourceTree = "<group>"; };
+		0705580B1B5EB3CA00D84A6D /* DataTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
+		070558251B5F696300D84A6D /* NewExpenseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExpenseTableViewController.swift; sourceTree = "<group>"; };
+		071433701D5BB69D0090AE1C /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		072557031BA31EEC00A0F4EC /* AFImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AFImageExtension.swift; sourceTree = "<group>"; };
+		072557041BA31EEC00A0F4EC /* AFImageVIewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AFImageVIewExtension.swift; sourceTree = "<group>"; };
+		076B22B91B6DD0A8004F5DEA /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		076DDEA81B71E28400DE5DDB /* ExpenseImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseImageViewController.swift; sourceTree = "<group>"; };
+		077114851B603005009CE662 /* IntermediateNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntermediateNavigationController.swift; sourceTree = "<group>"; };
+		077114871B608E35009CE662 /* CustomExpenseViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomExpenseViewCell.swift; sourceTree = "<group>"; };
+		077E25341C0791B6004A86F2 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "Pods/../build/Debug-iphoneos/RealmSwift.framework"; sourceTree = "<group>"; };
+		0783DA351B695D3100F9E868 /* AddExpensesToReportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExpensesToReportController.swift; sourceTree = "<group>"; };
+		078CBFCC1B818667002BD451 /* TutorialContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialContentViewController.swift; sourceTree = "<group>"; };
+		078CBFCE1B823A84002BD451 /* TutorialRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialRootViewController.swift; sourceTree = "<group>"; };
+		079443E11B6E9F30000E7FD1 /* DeleteDelayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteDelayTableViewController.swift; sourceTree = "<group>"; };
+		07B11C101D37DA3400777CAC /* PTSans.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = PTSans.ttc; sourceTree = "<group>"; };
+		07B11C121D37E12100777CAC /* AnimatedTutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedTutorial.swift; sourceTree = "<group>"; };
+		07D3C6231B6EB45C00FD80D1 /* EmailListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailListTableViewController.swift; sourceTree = "<group>"; };
+		07E746D51B64089A00961B61 /* OpenReportViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenReportViewCell.swift; sourceTree = "<group>"; };
+		07E746DA1B6424A200961B61 /* SubmittedReportViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmittedReportViewCell.swift; sourceTree = "<group>"; };
+		07E746DE1B65752E00961B61 /* ReportDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportDetailTableViewController.swift; sourceTree = "<group>"; };
+		07E746E01B659EC000961B61 /* CustomTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabViewController.swift; sourceTree = "<group>"; };
+		07ED62711CF4B1600097BFB8 /* PDFGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFGenerator.swift; sourceTree = "<group>"; };
+		2BBF3ACE3E0C741C56A1FD0F /* Pods-Send Money.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Send Money.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Send Money/Pods-Send Money.debug.xcconfig"; sourceTree = "<group>"; };
+		4597DD64B065C1C096280C43 /* Pods_Send_MoneyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Send_MoneyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4906B70E0E5CB1575BC7885F /* Pods-Send MoneyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Send MoneyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Send MoneyTests/Pods-Send MoneyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A4D65609C6606AF313E984A4 /* Pods-Send Money.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Send Money.release.xcconfig"; path = "Pods/Target Support Files/Pods-Send Money/Pods-Send Money.release.xcconfig"; sourceTree = "<group>"; };
+		B310D9118159D3BB9F5C9D42 /* Pods-Send MoneyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Send MoneyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Send MoneyTests/Pods-Send MoneyTests.release.xcconfig"; sourceTree = "<group>"; };
+		EB77A256319621B21D5FFD26 /* Pods_Send_Money.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Send_Money.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		070557D71B5EA93800D84A6D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				076B22BA1B6DD0A8004F5DEA /* iAd.framework in Frameworks */,
+				1CDF56F563CB20576C901181 /* Pods_Send_Money.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		070557EE1B5EA93800D84A6D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5688587F487CAA8DCC20E8C /* Pods_Send_MoneyTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		070557D11B5EA93800D84A6D = {
+			isa = PBXGroup;
+			children = (
+				070557DC1B5EA93800D84A6D /* Send Money */,
+				070557F41B5EA93800D84A6D /* Send MoneyTests */,
+				070557DB1B5EA93800D84A6D /* Products */,
+				D243B2F5587075EE24DDE141 /* Pods */,
+				A7927B4CEE89BD88AE36A4A5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		070557DB1B5EA93800D84A6D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				070557DA1B5EA93800D84A6D /* Send Money.app */,
+				070557F11B5EA93800D84A6D /* Send Money.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		070557DC1B5EA93800D84A6D /* Send Money */ = {
+			isa = PBXGroup;
+			children = (
+				070557E51B5EA93800D84A6D /* Main.storyboard */,
+				070557DF1B5EA93800D84A6D /* AppDelegate.swift */,
+				07CDB2711B68B817001BC45E /* Resources */,
+				070558191B5ED33D00D84A6D /* View Controllers */,
+				070557E81B5EA93800D84A6D /* Images.xcassets */,
+				070557EA1B5EA93800D84A6D /* LaunchScreen.xib */,
+				070557DD1B5EA93800D84A6D /* Supporting Files */,
+			);
+			path = "Send Money";
+			sourceTree = "<group>";
+		};
+		070557DD1B5EA93800D84A6D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				070557DE1B5EA93800D84A6D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		070557F41B5EA93800D84A6D /* Send MoneyTests */ = {
+			isa = PBXGroup;
+			children = (
+				070557F71B5EA93800D84A6D /* Send_MoneyTests.swift */,
+				070557F51B5EA93800D84A6D /* Supporting Files */,
+			);
+			path = "Send MoneyTests";
+			sourceTree = "<group>";
+		};
+		070557F51B5EA93800D84A6D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				070557F61B5EA93800D84A6D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		070558191B5ED33D00D84A6D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				07E746D71B6408A000961B61 /* Expenses */,
+				07E746D81B6408AC00961B61 /* Reports */,
+				079443E01B6E9F0A000E7FD1 /* Settings */,
+				078CBFCB1B816099002BD451 /* Tutorials */,
+				07E746D91B6408B500961B61 /* Other */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		078CBFCB1B816099002BD451 /* Tutorials */ = {
+			isa = PBXGroup;
+			children = (
+				071433701D5BB69D0090AE1C /* TutorialViewController.swift */,
+				078CBFCE1B823A84002BD451 /* TutorialRootViewController.swift */,
+				078CBFCC1B818667002BD451 /* TutorialContentViewController.swift */,
+				07B11C121D37E12100777CAC /* AnimatedTutorial.swift */,
+			);
+			name = Tutorials;
+			sourceTree = "<group>";
+		};
+		079443E01B6E9F0A000E7FD1 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				070333EE1B6DE7280017ED37 /* SettingsTableViewController.swift */,
+				07D3C6231B6EB45C00FD80D1 /* EmailListTableViewController.swift */,
+				079443E11B6E9F30000E7FD1 /* DeleteDelayTableViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		07CDB2711B68B817001BC45E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				07B11C101D37DA3400777CAC /* PTSans.ttc */,
+				0705580B1B5EB3CA00D84A6D /* DataTypes.swift */,
+				072557031BA31EEC00A0F4EC /* AFImageExtension.swift */,
+				072557041BA31EEC00A0F4EC /* AFImageVIewExtension.swift */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		07E746D71B6408A000961B61 /* Expenses */ = {
+			isa = PBXGroup;
+			children = (
+				070557E11B5EA93800D84A6D /* ExpenseTableViewController.swift */,
+				070558251B5F696300D84A6D /* NewExpenseTableViewController.swift */,
+				076DDEA81B71E28400DE5DDB /* ExpenseImageViewController.swift */,
+				077114871B608E35009CE662 /* CustomExpenseViewCell.swift */,
+			);
+			name = Expenses;
+			sourceTree = "<group>";
+		};
+		07E746D81B6408AC00961B61 /* Reports */ = {
+			isa = PBXGroup;
+			children = (
+				070557E31B5EA93800D84A6D /* ReportTableViewController.swift */,
+				07E746DE1B65752E00961B61 /* ReportDetailTableViewController.swift */,
+				0783DA351B695D3100F9E868 /* AddExpensesToReportController.swift */,
+				07E746D51B64089A00961B61 /* OpenReportViewCell.swift */,
+				07E746DA1B6424A200961B61 /* SubmittedReportViewCell.swift */,
+				07ED62711CF4B1600097BFB8 /* PDFGenerator.swift */,
+			);
+			name = Reports;
+			sourceTree = "<group>";
+		};
+		07E746D91B6408B500961B61 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				07E746E01B659EC000961B61 /* CustomTabViewController.swift */,
+				077114851B603005009CE662 /* IntermediateNavigationController.swift */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		A7927B4CEE89BD88AE36A4A5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				077E25341C0791B6004A86F2 /* RealmSwift.framework */,
+				076B22B91B6DD0A8004F5DEA /* iAd.framework */,
+				EB77A256319621B21D5FFD26 /* Pods_Send_Money.framework */,
+				4597DD64B065C1C096280C43 /* Pods_Send_MoneyTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D243B2F5587075EE24DDE141 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2BBF3ACE3E0C741C56A1FD0F /* Pods-Send Money.debug.xcconfig */,
+				A4D65609C6606AF313E984A4 /* Pods-Send Money.release.xcconfig */,
+				4906B70E0E5CB1575BC7885F /* Pods-Send MoneyTests.debug.xcconfig */,
+				B310D9118159D3BB9F5C9D42 /* Pods-Send MoneyTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		070557D91B5EA93800D84A6D /* Send Money */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 070557FB1B5EA93800D84A6D /* Build configuration list for PBXNativeTarget "Send Money" */;
+			buildPhases = (
+				71D35E1F9F30492CB0635154 /* Check Pods Manifest.lock */,
+				070557D61B5EA93800D84A6D /* Sources */,
+				070557D71B5EA93800D84A6D /* Frameworks */,
+				07937C521B79EC39007A6D43 /* Version Tracking */,
+				070557D81B5EA93800D84A6D /* Resources */,
+				070558091B5EB30D00D84A6D /* Embed Frameworks */,
+				8E3A6BAAEFBD824B67F1DB14 /* Embed Pods Frameworks */,
+				1DA7A61E22A9532DC6CB4ED3 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Send Money";
+			productName = "Send Money";
+			productReference = 070557DA1B5EA93800D84A6D /* Send Money.app */;
+			productType = "com.apple.product-type.application";
+		};
+		070557F01B5EA93800D84A6D /* Send MoneyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 070557FE1B5EA93800D84A6D /* Build configuration list for PBXNativeTarget "Send MoneyTests" */;
+			buildPhases = (
+				4030DB4AD9A3FBF1509778A5 /* Check Pods Manifest.lock */,
+				070557ED1B5EA93800D84A6D /* Sources */,
+				070557EE1B5EA93800D84A6D /* Frameworks */,
+				070557EF1B5EA93800D84A6D /* Resources */,
+				570F6590093A8270251C85D2 /* Embed Pods Frameworks */,
+				9D2639407378916904EB4DE9 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				070557F31B5EA93800D84A6D /* PBXTargetDependency */,
+			);
+			name = "Send MoneyTests";
+			productName = "Send MoneyTests";
+			productReference = 070557F11B5EA93800D84A6D /* Send Money.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		070557D21B5EA93800D84A6D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Eric Marshall";
+				TargetAttributes = {
+					070557D91B5EA93800D84A6D = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 3MDMT7M4H8;
+						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
+					};
+					070557F01B5EA93800D84A6D = {
+						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0800;
+						TestTargetID = 070557D91B5EA93800D84A6D;
+					};
+				};
+			};
+			buildConfigurationList = 070557D51B5EA93800D84A6D /* Build configuration list for PBXProject "Send Money" */;
+			compatibilityVersion = "Xcode 6.3";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 070557D11B5EA93800D84A6D;
+			productRefGroup = 070557DB1B5EA93800D84A6D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				070557D91B5EA93800D84A6D /* Send Money */,
+				070557F01B5EA93800D84A6D /* Send MoneyTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		070557D81B5EA93800D84A6D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07B11C111D37DA3400777CAC /* PTSans.ttc in Resources */,
+				070557E71B5EA93800D84A6D /* Main.storyboard in Resources */,
+				070557EC1B5EA93800D84A6D /* LaunchScreen.xib in Resources */,
+				070557E91B5EA93800D84A6D /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		070557EF1B5EA93800D84A6D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		07937C521B79EC39007A6D43 /* Version Tracking */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Version Tracking";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nnewBuildNumber=$(git rev-list HEAD --count)\nnewBuildNumber=$(($newBuildNumber))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $newBuildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n\n\nif ((newBuildNumber > buildNumber)); then\nVERSIONNUM=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nNEWSUBVERSION=`echo $VERSIONNUM | awk -F \".\" '{print $3}'`\nNEWSUBVERSION=$(($NEWSUBVERSION + 1))\nNEWVERSIONSTRING=`echo $VERSIONNUM | awk -F \".\" '{print $1 \".\" $2 \".'$NEWSUBVERSION'\" }'`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $NEWVERSIONSTRING\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\nfi";
+		};
+		1DA7A61E22A9532DC6CB4ED3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Send Money/Pods-Send Money-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4030DB4AD9A3FBF1509778A5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		570F6590093A8270251C85D2 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Send MoneyTests/Pods-Send MoneyTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		71D35E1F9F30492CB0635154 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8E3A6BAAEFBD824B67F1DB14 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Send Money/Pods-Send Money-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D2639407378916904EB4DE9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Send MoneyTests/Pods-Send MoneyTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		070557D61B5EA93800D84A6D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				077114881B608E35009CE662 /* CustomExpenseViewCell.swift in Sources */,
+				077114861B603005009CE662 /* IntermediateNavigationController.swift in Sources */,
+				07E746DF1B65752E00961B61 /* ReportDetailTableViewController.swift in Sources */,
+				070557E41B5EA93800D84A6D /* ReportTableViewController.swift in Sources */,
+				070558101B5EB3CA00D84A6D /* DataTypes.swift in Sources */,
+				0783DA361B695D3100F9E868 /* AddExpensesToReportController.swift in Sources */,
+				07B11C131D37E12100777CAC /* AnimatedTutorial.swift in Sources */,
+				079443E21B6E9F30000E7FD1 /* DeleteDelayTableViewController.swift in Sources */,
+				072557051BA31EEC00A0F4EC /* AFImageExtension.swift in Sources */,
+				070558261B5F696300D84A6D /* NewExpenseTableViewController.swift in Sources */,
+				071433711D5BB69D0090AE1C /* TutorialViewController.swift in Sources */,
+				076DDEA91B71E28400DE5DDB /* ExpenseImageViewController.swift in Sources */,
+				078CBFCF1B823A84002BD451 /* TutorialRootViewController.swift in Sources */,
+				070557E01B5EA93800D84A6D /* AppDelegate.swift in Sources */,
+				07E746E11B659EC000961B61 /* CustomTabViewController.swift in Sources */,
+				07D3C6241B6EB45C00FD80D1 /* EmailListTableViewController.swift in Sources */,
+				070333EF1B6DE7280017ED37 /* SettingsTableViewController.swift in Sources */,
+				078CBFCD1B818667002BD451 /* TutorialContentViewController.swift in Sources */,
+				070557E21B5EA93800D84A6D /* ExpenseTableViewController.swift in Sources */,
+				07E746DB1B6424A200961B61 /* SubmittedReportViewCell.swift in Sources */,
+				07E746D61B64089A00961B61 /* OpenReportViewCell.swift in Sources */,
+				07ED62721CF4B1600097BFB8 /* PDFGenerator.swift in Sources */,
+				072557061BA31EEC00A0F4EC /* AFImageVIewExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		070557ED1B5EA93800D84A6D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				070557F81B5EA93800D84A6D /* Send_MoneyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		070557F31B5EA93800D84A6D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 070557D91B5EA93800D84A6D /* Send Money */;
+			targetProxy = 070557F21B5EA93800D84A6D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		070557E51B5EA93800D84A6D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				070557E61B5EA93800D84A6D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		070557EA1B5EA93800D84A6D /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				070557EB1B5EA93800D84A6D /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		070557F91B5EA93800D84A6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		070557FA1B5EA93800D84A6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		070557FC1B5EA93800D84A6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BBF3ACE3E0C741C56A1FD0F /* Pods-Send Money.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1.1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				INFOPLIST_FILE = "Send Money/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.marshall.eric.Send-Money";
+				PRODUCT_NAME = "Send Money";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		070557FD1B5EA93800D84A6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4D65609C6606AF313E984A4 /* Pods-Send Money.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1.1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				INFOPLIST_FILE = "Send Money/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.marshall.eric.Send-Money";
+				PRODUCT_NAME = "Send Money";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		070557FF1B5EA93800D84A6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4906B70E0E5CB1575BC7885F /* Pods-Send MoneyTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Send MoneyTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eric.marshall.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "Send Money";
+				SWIFT_VERSION = 2.3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Send Money.app/Send Money";
+			};
+			name = Debug;
+		};
+		070558001B5EA93800D84A6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B310D9118159D3BB9F5C9D42 /* Pods-Send MoneyTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Send MoneyTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eric.marshall.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "Send Money";
+				SWIFT_VERSION = 2.3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Send Money.app/Send Money";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		070557D51B5EA93800D84A6D /* Build configuration list for PBXProject "Send Money" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				070557F91B5EA93800D84A6D /* Debug */,
+				070557FA1B5EA93800D84A6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		070557FB1B5EA93800D84A6D /* Build configuration list for PBXNativeTarget "Send Money" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				070557FC1B5EA93800D84A6D /* Debug */,
+				070557FD1B5EA93800D84A6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		070557FE1B5EA93800D84A6D /* Build configuration list for PBXNativeTarget "Send MoneyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				070557FF1B5EA93800D84A6D /* Debug */,
+				070558001B5EA93800D84A6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 070557D21B5EA93800D84A6D /* Project object */;
+}

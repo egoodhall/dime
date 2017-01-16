@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F5D98EF429BBD7204A4A4D3C45A34915F8D8BAF2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F5D98EF429BBD7204A4A4D3C45A34915F8D8BAF2" : 0,
+    "4F520830FE6D91670C35DF9952B1149E275D9D8B" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "AABAC602-D024-46BD-A169-E9519FD7D7FD",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F5D98EF429BBD7204A4A4D3C45A34915F8D8BAF2" : "dime-ios\/",
+    "4F520830FE6D91670C35DF9952B1149E275D9D8B" : "..\/..\/Dropbox\/Programming\/iOS%20Apps\/Send%20Money"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Send Money",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Send Money.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/emm035\/send-money.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4F520830FE6D91670C35DF9952B1149E275D9D8B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/emm035\/dime-android.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F5D98EF429BBD7204A4A4D3C45A34915F8D8BAF2"
+    }
+  ]
+}

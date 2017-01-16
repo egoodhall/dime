@@ -1,0 +1,36 @@
+PODS:
+  - BRYSerialAnimationQueue (1.0.0)
+  - Material (1.42.7)
+  - OnOffButton (1.2)
+  - RazzleDazzle (0.1.3)
+  - Realm (1.0.2):
+    - Realm/Headers (= 1.0.2)
+  - Realm/Headers (1.0.2)
+  - RealmSwift (1.0.2):
+    - Realm (= 1.0.2)
+  - SSBouncyButton (1.0.7):
+    - BRYSerialAnimationQueue (~> 1.0)
+    - UIColor-Hex (~> 0.1)
+    - UIImage+BetterAdditions (~> 2.0)
+  - UIColor-Hex (0.1.1)
+  - UIImage+BetterAdditions (2.0.3)
+
+DEPENDENCIES:
+  - Material (~> 1.0)
+  - OnOffButton
+  - RazzleDazzle
+  - RealmSwift
+  - SSBouncyButton (~> 1.0)
+
+SPEC CHECKSUMS:
+  BRYSerialAnimationQueue: 75feef56345338619a6c2111f2a81de28a59c368
+  Material: 2d46a44719b1f19e52956518af8aea54ac714963
+  OnOffButton: 4b55bf1720e3fbfdeae07213e2384ef3a2a2882b
+  RazzleDazzle: bf883fdb5611435c82cb25c2e3451229a84e27d7
+  Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
+  RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
+  SSBouncyButton: 90f6da63da6c6d32f9dab4928b80632b427d871a
+  UIColor-Hex: 77e80f383c6b3a63c5e95a9a4a7f4a71976e38a5
+  UIImage+BetterAdditions: 185cbe06059747dd4a65562c1b0c560e761d030c
+
+COCOAPODS: 0.39.0
