@@ -1,1 +1,1 @@
-# dime-android
+# dime-ios
