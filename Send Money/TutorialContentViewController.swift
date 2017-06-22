@@ -11,18 +11,18 @@ import RealmSwift
 
 class TutorialContentViewController: UIViewController {
     
-    @IBAction func doneWithTutorial(sender: UIButton) {
-        let nextVC = storyboard?.instantiateViewControllerWithIdentifier("mainAppRootTabController") as! CustomTabViewController
-        self.presentViewController(nextVC, animated: true, completion: nil)
+    @IBAction func doneWithTutorial(_ sender: UIButton) {
+        let nextVC = storyboard?.instantiateViewController(withIdentifier: "mainAppRootTabController") as! CustomTabViewController
+        self.present(nextVC, animated: true, completion: nil)
     }
     
-    @IBAction func stopShowingTutorial(sender: UIButton) {
+    @IBAction func stopShowingTutorial(_ sender: UIButton) {
         let realm = try! Realm()
         try! realm.write {
-            realm.objects(Settings)[0].showTutorial = false
+            realm.objects(Settings.self)[0].showTutorial = false
         }
-        let nextVC = storyboard?.instantiateViewControllerWithIdentifier("mainAppRootTabController") as! CustomTabViewController
-        self.presentViewController(nextVC, animated: true, completion: nil)
+        let nextVC = storyboard?.instantiateViewController(withIdentifier: "mainAppRootTabController") as! CustomTabViewController
+        self.present(nextVC, animated: true, completion: nil)
     }
 
     @IBOutlet weak var doneButton: UIButton!
@@ -37,11 +37,11 @@ class TutorialContentViewController: UIViewController {
         tutorialImage.image = self.image
         
         doneButton.alpha = 0.0
-        doneButton.enabled = false
-        view.bringSubviewToFront(doneButton)
+        doneButton.isEnabled = false
+        view.bringSubview(toFront: doneButton)
         dontShowAgainButton.alpha = 0.0
-        dontShowAgainButton.enabled = false
-        view.bringSubviewToFront(dontShowAgainButton)
+        dontShowAgainButton.isEnabled = false
+        view.bringSubview(toFront: dontShowAgainButton)
         
         switch page {
             case 0:
@@ -75,23 +75,23 @@ class TutorialContentViewController: UIViewController {
     }
 
     func performButtonSetup() {
-        doneButton.titleLabel?.textColor = .whiteColor()
-        doneButton.layer.backgroundColor = UIColor.blueTintColor().CGColor
-        doneButton.layer.borderColor = doneButton.titleLabel?.textColor.CGColor
+        doneButton.titleLabel?.textColor = .white
+        doneButton.layer.backgroundColor = UIColor.blueTintColor().cgColor
+        doneButton.layer.borderColor = doneButton.titleLabel?.textColor.cgColor
         doneButton.layer.cornerRadius = doneButton.frame.height / 7
         doneButton.layer.borderWidth = 1.0
         
-        dontShowAgainButton.titleLabel?.textColor = .whiteColor()
-        dontShowAgainButton.layer.backgroundColor = UIColor.blueTintColor().CGColor
-        dontShowAgainButton.layer.borderColor = dontShowAgainButton.titleLabel?.textColor.CGColor
+        dontShowAgainButton.titleLabel?.textColor = .white
+        dontShowAgainButton.layer.backgroundColor = UIColor.blueTintColor().cgColor
+        dontShowAgainButton.layer.borderColor = dontShowAgainButton.titleLabel?.textColor.cgColor
         dontShowAgainButton.layer.cornerRadius = dontShowAgainButton.frame.height / 7
         dontShowAgainButton.layer.borderWidth = 1.0
         
         if page == 4{
             doneButton.alpha = 1.0
-            doneButton.enabled = true
+            doneButton.isEnabled = true
             dontShowAgainButton.alpha = 1.0
-            dontShowAgainButton.enabled = true
+            dontShowAgainButton.isEnabled = true
         }
     }
 }

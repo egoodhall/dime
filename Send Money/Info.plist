@@ -17,13 +17,17 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.29</string>
+	<string>2.0.40</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>36</string>
+	<string>4</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Dime uses the camera to take pictures of expenses</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Dime can use images from your photo library for expenses</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>PTSans.ttc</string>

@@ -17,20 +17,20 @@ class SettingsTableViewController: UITableViewController {
     //---------------------------------------------------
     @IBOutlet weak var showTutorialAtLaunchSwitch: UISwitch!
 
-    @IBAction func showTutorialAtLaunchSwitchDidChange(sender: UISwitch) {
+    @IBAction func showTutorialAtLaunchSwitchDidChange(_ sender: UISwitch) {
         try! realm.write {
-            self.settings.showTutorial = sender.on
+            self.settings.showTutorial = sender.isOn
         }
     }
 
     //-----------------------------------------------
     // MARK: - Versioning Label and App Store reviews
     //-----------------------------------------------
-    @IBAction func didSelectReviewCell(sender: UITapGestureRecognizer) {
+    @IBAction func didSelectReviewCell(_ sender: UITapGestureRecognizer) {
 
-        let path: NSURL = NSURL(string: "itms-apps://itunes.apple.com/us/app/id1028920691")!
+        let path: URL = URL(string: "itms-apps://itunes.apple.com/us/app/id1028920691")!
 
-        UIApplication.sharedApplication().openURL(path)
+        UIApplication.shared.openURL(path)
     }
 
     @IBOutlet weak var currentVersionLabel: UILabel!
@@ -40,37 +40,37 @@ class SettingsTableViewController: UITableViewController {
     //-------------------------------------------
 
     let realm = try! Realm()
-    let numberFormatter = NSNumberFormatter()
+    let numberFormatter = NumberFormatter()
     var settings: Settings!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.barTintColor = .redTintColor()
-        settings = realm.objects(Settings)[0] as Settings
+        settings = realm.objects(Settings.self)[0] as Settings
         updateDeleteDelayDetail()
         
         currentVersionLabel.text = ""
-        if let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
-            if let build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String {
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            if let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
                 currentVersionLabel.text = "Version \(version) (\(build))"
             }
         }
         
-        numberFormatter.numberStyle = .CurrencyStyle
+        numberFormatter.numberStyle = .currency
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         updateDeleteDelayDetail()
-        self.navigationController?.toolbarHidden = true
+        self.navigationController?.isToolbarHidden = true
         for section in 0 ..< tableView.numberOfSections {
-            for i in 0 ..< tableView.numberOfRowsInSection(section) {
-                if tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: section))!.selected {
-                   tableView.deselectRowAtIndexPath(NSIndexPath(forRow: i, inSection: section), animated: false)
+            for i in 0 ..< tableView.numberOfRows(inSection: section) {
+                if tableView.cellForRow(at: IndexPath(row: i, section: section))!.isSelected {
+                   tableView.deselectRow(at: IndexPath(row: i, section: section), animated: false)
                 }
             }
         }
-        showTutorialAtLaunchSwitch.on = settings.showTutorial
+        showTutorialAtLaunchSwitch.isOn = settings.showTutorial
     }
     
     override func viewDidLayoutSubviews() {
@@ -95,13 +95,13 @@ class SettingsTableViewController: UITableViewController {
         default:
             delay = "Never"
         }
-        tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))?.detailTextLabel?.text = delay
+        tableView.cellForRow(at: IndexPath(row: 1, section: 0))?.detailTextLabel?.text = delay
         
         switch settings.emailList.count {
             case 1:
-                tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))?.detailTextLabel?.text = "\(settings.emailList.count) Recipient"
+                tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.detailTextLabel?.text = "\(settings.emailList.count) Recipient"
             default:
-                tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))?.detailTextLabel?.text = "\(settings.emailList.count) Recipients"
+                tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.detailTextLabel?.text = "\(settings.emailList.count) Recipients"
         }
 
     }
@@ -111,17 +111,17 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - Navigation
     //-------------------
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDeleteDelaySegue" {
-            let destVC = segue.destinationViewController as! DeleteDelayTableViewController
+            let destVC = segue.destination as! DeleteDelayTableViewController
             destVC.hidesBottomBarWhenPushed = true
         }
         if segue.identifier == "showEmailListSegue" {
-            let destVC = segue.destinationViewController as! EmailListTableViewController
+            let destVC = segue.destination as! EmailListTableViewController
             destVC.hidesBottomBarWhenPushed = true
         }
         if segue.identifier == "showTutorialSegue" {
-            let destVC = segue.destinationViewController as! TutorialViewController
+            let destVC = segue.destination as! TutorialViewController
             destVC.hidesBottomBarWhenPushed = true
             destVC.title = "Tutorial"
             destVC.shownAtBeginning = false

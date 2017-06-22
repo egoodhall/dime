@@ -14,10 +14,10 @@ class CustomTabViewController: UITabBarController {
         super.viewDidLoad()
 
         var myBarItems = self.tabBar.items as [UITabBarItem]!
-        myBarItems[0].selectedImage = UIImage(named: "SelectedExpenseIcon.pdf")
+        myBarItems?[0].selectedImage = UIImage(named: "SelectedExpenseIcon.pdf")
 
-        myBarItems[1].selectedImage = UIImage(named: "SelectedReportIcon.pdf")
+        myBarItems?[1].selectedImage = UIImage(named: "SelectedReportIcon.pdf")
 
-        myBarItems[2].selectedImage = UIImage(named: "SelectedGearIcon.pdf")
+        myBarItems?[2].selectedImage = UIImage(named: "SelectedGearIcon.pdf")
     }
 }

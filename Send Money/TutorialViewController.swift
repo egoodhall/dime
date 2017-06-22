@@ -19,36 +19,36 @@ class TutorialViewController: AnimatedPagingScrollViewController {
     var shownAtBeginning = true
     var settings: Settings!
     
-    private let pageControl = UIPageControl()
+    fileprivate let pageControl = UIPageControl()
 
-    private let prompt1 = "Dime makes expense reports quick and painless"
-    private let prompt2 = "Expenses hold information about transactions"
-    private let prompt3 = "Reports let you group Expenses together"
-    private let prompt4 = "Compile Reports into PDFs and send directly from your email"
+    fileprivate let prompt1 = "Dime makes expense reports quick and painless"
+    fileprivate let prompt2 = "Expenses hold information about transactions"
+    fileprivate let prompt3 = "Reports let you group Expenses together"
+    fileprivate let prompt4 = "Compile Reports into PDFs and send directly from your email"
 
     // First Page
-    private let envelopeFront = UIImageView(image: UIImage(named: "Envelope-Front"))
-    private let envelopeBack = UIImageView(image: UIImage(named: "Envelope-Back"))
-    private let paper = UIImageView(image: UIImage(named: "Paper"))
-    private let dollar = UIImageView(image: UIImage(named: "Dollar"))
-    private let prompt1Label = UILabel()
+    fileprivate let envelopeFront = UIImageView(image: UIImage(named: "Envelope-Front"))
+    fileprivate let envelopeBack = UIImageView(image: UIImage(named: "Envelope-Back"))
+    fileprivate let paper = UIImageView(image: UIImage(named: "Paper"))
+    fileprivate let dollar = UIImageView(image: UIImage(named: "Dollar"))
+    fileprivate let prompt1Label = UILabel()
 
     // Second Page
-    private let prompt2Label = UILabel()
-    private let expense1 = UIImageView(image: UIImage(named: "Expense"))
-    private let burger = UIImageView(image: UIImage(named: "Burger"))
-    private let fries = UIImageView(image: UIImage(named: "Fries"))
+    fileprivate let prompt2Label = UILabel()
+    fileprivate let expense1 = UIImageView(image: UIImage(named: "Expense"))
+    fileprivate let burger = UIImageView(image: UIImage(named: "Burger"))
+    fileprivate let fries = UIImageView(image: UIImage(named: "Fries"))
 
     // Third Page
-    private let prompt3Label = UILabel()
-    private let expense2 = UIImageView(image: UIImage(named: "Expense"))
+    fileprivate let prompt3Label = UILabel()
+    fileprivate let expense2 = UIImageView(image: UIImage(named: "Expense"))
 
     // Fourth Page
-    private let prompt4Label = UILabel()
-    private let letsGoBtn = SSBouncyButton()
-    private let showAgainBtn = OnOffButton()
-    private let showAgainView = UIView()
-    private let showAgainText = UILabel()
+    fileprivate let prompt4Label = UILabel()
+    fileprivate let letsGoBtn = SSBouncyButton()
+    fileprivate let showAgainBtn = OnOffButton()
+    fileprivate let showAgainView = UIView()
+    fileprivate let showAgainText = UILabel()
 
     override func numberOfPages() -> Int {
         return 4
@@ -58,7 +58,7 @@ class TutorialViewController: AnimatedPagingScrollViewController {
         super.viewDidLoad()
 
         realm = try! Realm()
-        settings = realm.objects(Settings)[0] as Settings
+        settings = realm.objects(Settings.self)[0] as Settings
 
         setupPageControl()
         doFirstPageSetup()
@@ -77,7 +77,7 @@ class TutorialViewController: AnimatedPagingScrollViewController {
         pageControl.pageIndicatorTintColor = UIColor(r: 200, g: 200, b: 200, alpha: 0.5)
         pageControl.currentPageIndicatorTintColor = UIColor(r: 200, g: 200, b: 200, alpha: 1.0)
         
-        let bottomY = NSLayoutConstraint(item: pageControl, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1.0, constant: 0)
+        let bottomY = NSLayoutConstraint(item: pageControl, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .bottom, multiplier: 1.0, constant: 0)
         
         contentView.addConstraints([bottomY])
         
@@ -108,12 +108,12 @@ class TutorialViewController: AnimatedPagingScrollViewController {
 
         prompt1Label.text = prompt1
         prompt1Label.numberOfLines = 0
-        prompt1Label.textAlignment = .Center
-        prompt1Label.textColor = UIColor.whiteColor()
+        prompt1Label.textAlignment = .center
+        prompt1Label.textColor = UIColor.white
         prompt1Label.font = UIFont(name: "PT Sans", size: 24)
 
-        let topY = NSLayoutConstraint(item: prompt1Label, attribute: .Top, relatedBy: .Equal, toItem: envelopeBack, attribute: .Bottom, multiplier: 1.1, constant: 0)
-        let width = NSLayoutConstraint(item: prompt1Label, attribute: .Width, relatedBy: .Equal, toItem: .None, attribute: .NotAnAttribute, multiplier: 1, constant: view.bounds.width - 100)
+        let topY = NSLayoutConstraint(item: prompt1Label, attribute: .top, relatedBy: .equal, toItem: envelopeBack, attribute: .bottom, multiplier: 1.1, constant: 0)
+        let width = NSLayoutConstraint(item: prompt1Label, attribute: .width, relatedBy: .equal, toItem: .none, attribute: .notAnAttribute, multiplier: 1, constant: view.bounds.width - 100)
         contentView.addConstraints([topY, width])
 
         let slide = ConstraintConstantAnimation(superview: scrollView, constraint: topY)
@@ -131,9 +131,9 @@ class TutorialViewController: AnimatedPagingScrollViewController {
 
 
         // Set the widths
-        let width = NSLayoutConstraint(item: envelopeBack, attribute: .Width, relatedBy: .Equal, toItem: .None, attribute: .NotAnAttribute, multiplier: 1, constant: view.bounds.width - 200.0)
-        let height = NSLayoutConstraint(item: envelopeBack, attribute: .Height, relatedBy: .Equal, toItem: envelopeBack, attribute: .Width, multiplier: 0.916, constant: 0)
-        let centerY = NSLayoutConstraint(item: envelopeBack, attribute: .CenterY, relatedBy: .Equal, toItem: contentView, attribute: .CenterY, multiplier: 0.75, constant: 0)
+        let width = NSLayoutConstraint(item: envelopeBack, attribute: .width, relatedBy: .equal, toItem: .none, attribute: .notAnAttribute, multiplier: 1, constant: view.bounds.width - 200.0)
+        let height = NSLayoutConstraint(item: envelopeBack, attribute: .height, relatedBy: .equal, toItem: envelopeBack, attribute: .width, multiplier: 0.916, constant: 0)
+        let centerY = NSLayoutConstraint(item: envelopeBack, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 0.75, constant: 0)
         contentView.addConstraints([width, height, centerY])
 
 
@@ -156,9 +156,9 @@ class TutorialViewController: AnimatedPagingScrollViewController {
         contentView.addSubview(envelopeFront)
 
         // Add the
-        let width = NSLayoutConstraint(item: envelopeFront, attribute: .Width, relatedBy: .Equal, toItem: envelopeBack, attribute: .Width, multiplier: 1, constant: 0)
-        let height = NSLayoutConstraint(item: envelopeFront, attribute: .Height, relatedBy: .Equal, toItem: envelopeBack, attribute: .Height, multiplier: 1, constant: 0)
-        let centerY = NSLayoutConstraint(item: envelopeFront, attribute: .CenterY, relatedBy: .Equal, toItem: envelopeBack, attribute: .CenterY, multiplier: 1, constant: 0)
+        let width = NSLayoutConstraint(item: envelopeFront, attribute: .width, relatedBy: .equal, toItem: envelopeBack, attribute: .width, multiplier: 1, constant: 0)
+        let height = NSLayoutConstraint(item: envelopeFront, attribute: .height, relatedBy: .equal, toItem: envelopeBack, attribute: .height, multiplier: 1, constant: 0)
+        let centerY = NSLayoutConstraint(item: envelopeFront, attribute: .centerY, relatedBy: .equal, toItem: envelopeBack, attribute: .centerY, multiplier: 1, constant: 0)
         contentView.addConstraints([width, height, centerY])
 
         keepView(envelopeFront, onPages: [-1, 0, 1, 3, 4])
@@ -167,11 +167,11 @@ class TutorialViewController: AnimatedPagingScrollViewController {
     func setupPaper() {
         contentView.addSubview(paper)
 
-        let height = NSLayoutConstraint(item: paper, attribute: .Height, relatedBy: .Equal, toItem: envelopeBack, attribute: .Height, multiplier: 0.8, constant: 0)
+        let height = NSLayoutConstraint(item: paper, attribute: .height, relatedBy: .equal, toItem: envelopeBack, attribute: .height, multiplier: 0.8, constant: 0)
         contentView.addConstraint(height)
-        let width = NSLayoutConstraint(item: paper, attribute: .Width, relatedBy: .Equal, toItem: paper, attribute: .Height, multiplier: 0.77381, constant: 0)
+        let width = NSLayoutConstraint(item: paper, attribute: .width, relatedBy: .equal, toItem: paper, attribute: .height, multiplier: 0.77381, constant: 0)
         contentView.addConstraint(width)
-        let centerY = NSLayoutConstraint(item: paper, attribute: .CenterY, relatedBy: .Equal, toItem: contentView, attribute: .CenterY, multiplier: 0.75, constant: 0)
+        let centerY = NSLayoutConstraint(item: paper, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 0.75, constant: 0)
         contentView.addConstraints([width, height, centerY])
 
         let scale = ScaleAnimation(view: paper)
@@ -205,11 +205,11 @@ class TutorialViewController: AnimatedPagingScrollViewController {
     func setupDollar() {
         contentView.addSubview(dollar)
 
-        let height = NSLayoutConstraint(item: dollar, attribute: .Height, relatedBy: .Equal, toItem: paper, attribute: .Height, multiplier: 1, constant: 0)
+        let height = NSLayoutConstraint(item: dollar, attribute: .height, relatedBy: .equal, toItem: paper, attribute: .height, multiplier: 1, constant: 0)
         contentView.addConstraint(height)
-        let width = NSLayoutConstraint(item: dollar, attribute: .Width, relatedBy: .Equal, toItem: paper, attribute: .Width, multiplier: 1, constant: 0)
+        let width = NSLayoutConstraint(item: dollar, attribute: .width, relatedBy: .equal, toItem: paper, attribute: .width, multiplier: 1, constant: 0)
         contentView.addConstraint(width)
-        let centerY = NSLayoutConstraint(item: dollar, attribute: .CenterY, relatedBy: .Equal, toItem: paper, attribute: .CenterY, multiplier: 1.0, constant: 0)
+        let centerY = NSLayoutConstraint(item: dollar, attribute: .centerY, relatedBy: .equal, toItem: paper, attribute: .centerY, multiplier: 1.0, constant: 0)
         contentView.addConstraints([width, height, centerY])
 
         let scale = ScaleAnimation(view: dollar)
@@ -252,12 +252,12 @@ class TutorialViewController: AnimatedPagingScrollViewController {
 
         prompt2Label.text = prompt2
         prompt2Label.numberOfLines = 0
-        prompt2Label.textAlignment = .Center
-        prompt2Label.textColor = UIColor.whiteColor()
+        prompt2Label.textAlignment = .center
+        prompt2Label.textColor = UIColor.white
         prompt2Label.font = UIFont(name: "PT Sans", size: 24)
 
-        let topY = NSLayoutConstraint(item: prompt2Label, attribute: .Top, relatedBy: .Equal, toItem: contentView, attribute: .Top, multiplier: 1, constant: -90)
-        let width = NSLayoutConstraint(item: prompt2Label, attribute: .Width, relatedBy: .Equal, toItem: .None, attribute: .NotAnAttribute, multiplier: 1, constant: view.bounds.width - 100)
+        let topY = NSLayoutConstraint(item: prompt2Label, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: -90)
+        let width = NSLayoutConstraint(item: prompt2Label, attribute: .width, relatedBy: .equal, toItem: .none, attribute: .notAnAttribute, multiplier: 1, constant: view.bounds.width - 100)
         contentView.addConstraints([topY, width])
 
         let slide = ConstraintConstantAnimation(superview: contentView, constraint: topY)
@@ -271,13 +271,13 @@ class TutorialViewController: AnimatedPagingScrollViewController {
     func setupExpense1() {
         contentView.addSubview(expense1)
 
-        let height = NSLayoutConstraint(item: expense1, attribute: .Height, relatedBy: .Equal, toItem: envelopeBack, attribute: .Height, multiplier: 0.8, constant: 0)
+        let height = NSLayoutConstraint(item: expense1, attribute: .height, relatedBy: .equal, toItem: envelopeBack, attribute: .height, multiplier: 0.8, constant: 0)
         contentView.addConstraint(height)
-        let width = NSLayoutConstraint(item: expense1, attribute: .Width, relatedBy: .Equal, toItem: paper, attribute: .Height, multiplier: 0.77381, constant: 0)
+        let width = NSLayoutConstraint(item: expense1, attribute: .width, relatedBy: .equal, toItem: paper, attribute: .height, multiplier: 0.77381, constant: 0)
         contentView.addConstraint(width)
-        let centerY = NSLayoutConstraint(item: expense1, attribute: .CenterY, relatedBy: .Equal, toItem: contentView, attribute: .CenterY, multiplier: 0.75, constant: 0)
+        let centerY = NSLayoutConstraint(item: expense1, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 0.75, constant: 0)
         contentView.addConstraints([width, height, centerY])
-        contentView.sendSubviewToBack(expense1)
+        contentView.sendSubview(toBack: expense1)
 
         let scale = ScaleAnimation(view: expense1)
         scale[0] = 1
@@ -308,9 +308,9 @@ class TutorialViewController: AnimatedPagingScrollViewController {
     func setupBurgerAndFries() {
         contentView.addSubview(fries)
 
-        let topY = NSLayoutConstraint(item: fries, attribute: .Top, relatedBy: .Equal, toItem: prompt2Label, attribute: .Bottom, multiplier: 1, constant: 40)
-        let friesHeight = NSLayoutConstraint(item: fries, attribute: .Height, relatedBy: .Equal, toItem: .None, attribute: .NotAnAttribute, multiplier: 1, constant: 120)
-        let friesWidth = NSLayoutConstraint(item: fries, attribute: .Width, relatedBy: .Equal, toItem: fries, attribute: .Height, multiplier: 0.65182, constant: 0)
+        let topY = NSLayoutConstraint(item: fries, attribute: .top, relatedBy: .equal, toItem: prompt2Label, attribute: .bottom, multiplier: 1, constant: 40)
+        let friesHeight = NSLayoutConstraint(item: fries, attribute: .height, relatedBy: .equal, toItem: .none, attribute: .notAnAttribute, multiplier: 1, constant: 120)
+        let friesWidth = NSLayoutConstraint(item: fries, attribute: .width, relatedBy: .equal, toItem: fries, attribute: .height, multiplier: 0.65182, constant: 0)
         contentView.addConstraints([topY, friesHeight, friesWidth])
 
         let slide = ConstraintConstantAnimation(superview: contentView, constraint: topY)
@@ -322,9 +322,9 @@ class TutorialViewController: AnimatedPagingScrollViewController {
 
         contentView.addSubview(burger)
 
-        let bottomY = NSLayoutConstraint(item: burger, attribute: .Bottom, relatedBy: .Equal, toItem: fries, attribute: .Bottom, multiplier: 1, constant: 0)
-        let burgerWidth = NSLayoutConstraint(item: burger, attribute: .Width, relatedBy: .Equal, toItem: fries, attribute: .Width, multiplier: 1.47826, constant: 0)
-        let burgerHeight = NSLayoutConstraint(item: burger, attribute: .Height, relatedBy: .Equal, toItem: burger, attribute: .Width, multiplier: 0.76891, constant: 0)
+        let bottomY = NSLayoutConstraint(item: burger, attribute: .bottom, relatedBy: .equal, toItem: fries, attribute: .bottom, multiplier: 1, constant: 0)
+        let burgerWidth = NSLayoutConstraint(item: burger, attribute: .width, relatedBy: .equal, toItem: fries, attribute: .width, multiplier: 1.47826, constant: 0)
+        let burgerHeight = NSLayoutConstraint(item: burger, attribute: .height, relatedBy: .equal, toItem: burger, attribute: .width, multiplier: 0.76891, constant: 0)
         contentView.addConstraints([bottomY, burgerHeight, burgerWidth])
 
         keepView(burger, onPages: [0.93])
@@ -344,12 +344,12 @@ class TutorialViewController: AnimatedPagingScrollViewController {
 
         prompt3Label.text = prompt3
         prompt3Label.numberOfLines = 0
-        prompt3Label.textAlignment = .Center
-        prompt3Label.textColor = UIColor.whiteColor()
+        prompt3Label.textAlignment = .center
+        prompt3Label.textColor = UIColor.white
         prompt3Label.font = UIFont(name: "PT Sans", size: 24)
 
-        let topY = NSLayoutConstraint(item: prompt3Label, attribute: .Top, relatedBy: .Equal, toItem: contentView, attribute: .Top, multiplier: 1, constant: -90)
-        let width = NSLayoutConstraint(item: prompt3Label, attribute: .Width, relatedBy: .Equal, toItem: .None, attribute: .NotAnAttribute, multiplier: 1, constant: view.bounds.width - 100)
+        let topY = NSLayoutConstraint(item: prompt3Label, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: -90)
+        let width = NSLayoutConstraint(item: prompt3Label, attribute: .width, relatedBy: .equal, toItem: .none, attribute: .notAnAttribute, multiplier: 1, constant: view.bounds.width - 100)
         contentView.addConstraints([topY, width])
 
         let slide = ConstraintConstantAnimation(superview: contentView, constraint: topY)
@@ -363,11 +363,11 @@ class TutorialViewController: AnimatedPagingScrollViewController {
     func setupExpense2() {
         contentView.addSubview(expense2)
 
-        let height = NSLayoutConstraint(item: expense2, attribute: .Height, relatedBy: .Equal, toItem: envelopeBack, attribute: .Height, multiplier: 0.8, constant: 0)
-        let width = NSLayoutConstraint(item: expense2, attribute: .Width, relatedBy: .Equal, toItem: paper, attribute: .Height, multiplier: 0.77381, constant: 0)
-        let centerY = NSLayoutConstraint(item: expense2, attribute: .CenterY, relatedBy: .Equal, toItem: contentView, attribute: .CenterY, multiplier: 0.75, constant: 0)
+        let height = NSLayoutConstraint(item: expense2, attribute: .height, relatedBy: .equal, toItem: envelopeBack, attribute: .height, multiplier: 0.8, constant: 0)
+        let width = NSLayoutConstraint(item: expense2, attribute: .width, relatedBy: .equal, toItem: paper, attribute: .height, multiplier: 0.77381, constant: 0)
+        let centerY = NSLayoutConstraint(item: expense2, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 0.75, constant: 0)
         contentView.addConstraints([width, height, centerY])
-        contentView.sendSubviewToBack(expense2)
+        contentView.sendSubview(toBack: expense2)
 
         let scale = ScaleAnimation(view: expense2)
         scale[0] = 1
@@ -404,8 +404,8 @@ class TutorialViewController: AnimatedPagingScrollViewController {
         setupLetsGoBtn()
         setupShowAgainBtn()
         if (!shownAtBeginning) {
-            letsGoBtn.enabled = false
-            showAgainBtn.enabled = false
+            letsGoBtn.isEnabled = false
+            showAgainBtn.isEnabled = false
         }
         setupShowAgainPrompt()
     }
@@ -415,12 +415,12 @@ class TutorialViewController: AnimatedPagingScrollViewController {
 
         prompt4Label.text = prompt4
         prompt4Label.numberOfLines = 0
-        prompt4Label.textAlignment = .Center
-        prompt4Label.textColor = UIColor.whiteColor()
+        prompt4Label.textAlignment = .center
+        prompt4Label.textColor = UIColor.white
         prompt4Label.font = UIFont(name: "PT Sans", size: 24)
 
-        let topY = NSLayoutConstraint(item: prompt4Label, attribute: .Top, relatedBy: .Equal, toItem: contentView, attribute: .Top, multiplier: 1, constant: -90)
-        let width = NSLayoutConstraint(item: prompt4Label, attribute: .Width, relatedBy: .Equal, toItem: .None, attribute: .NotAnAttribute, multiplier: 1, constant: view.bounds.width - 100)
+        let topY = NSLayoutConstraint(item: prompt4Label, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: -90)
+        let width = NSLayoutConstraint(item: prompt4Label, attribute: .width, relatedBy: .equal, toItem: .none, attribute: .notAnAttribute, multiplier: 1, constant: view.bounds.width - 100)
         contentView.addConstraints([topY, width])
 
         let slide = ConstraintConstantAnimation(superview: contentView, constraint: topY)
@@ -437,11 +437,11 @@ class TutorialViewController: AnimatedPagingScrollViewController {
         contentView.addSubview(showAgainText)
 
         showAgainText.text = "Always show tutorial"
-        showAgainText.textAlignment = .Left
-        showAgainText.textColor = .lightGrayColor()
+        showAgainText.textAlignment = .left
+        showAgainText.textColor = .lightGray
         showAgainText.font = UIFont(name: "PT Sans", size: 20)
 
-        let centerY = NSLayoutConstraint(item: showAgainText, attribute: .CenterY, relatedBy: .Equal, toItem: showAgainBtn, attribute: .CenterY, multiplier: 1, constant: 0)
+        let centerY = NSLayoutConstraint(item: showAgainText, attribute: .centerY, relatedBy: .equal, toItem: showAgainBtn, attribute: .centerY, multiplier: 1, constant: 0)
         contentView.addConstraints([centerY])
 
         keepView(showAgainText, onPages: [2, 3.05], atTimes: [2, 3])
@@ -451,12 +451,12 @@ class TutorialViewController: AnimatedPagingScrollViewController {
         contentView.addSubview(showAgainBtn)
         showAgainBtn.lineWidth = 1.5
         showAgainBtn.ringAlpha = 0.2
-        showAgainBtn.strokeColor = .greenColor()
-        showAgainBtn.addTarget(self, action: #selector(TutorialViewController.didTapOnOffButton), forControlEvents: .TouchUpInside)
+        showAgainBtn.strokeColor = .green
+        showAgainBtn.addTarget(self, action: #selector(TutorialViewController.didTapOnOffButton), for: .touchUpInside)
 
-        let topY = NSLayoutConstraint(item: showAgainBtn, attribute: .Top, relatedBy: .Equal, toItem: letsGoBtn, attribute: .Bottom, multiplier: 1, constant: 8)
-        let width = NSLayoutConstraint(item: showAgainBtn, attribute: .Width, relatedBy: .Equal, toItem: .None, attribute: .NotAnAttribute, multiplier: 1, constant: 42)
-        let height = NSLayoutConstraint(item: showAgainBtn, attribute: .Height, relatedBy: .Equal, toItem: showAgainBtn, attribute: .Height, multiplier: 1, constant: 0)
+        let topY = NSLayoutConstraint(item: showAgainBtn, attribute: .top, relatedBy: .equal, toItem: letsGoBtn, attribute: .bottom, multiplier: 1, constant: 8)
+        let width = NSLayoutConstraint(item: showAgainBtn, attribute: .width, relatedBy: .equal, toItem: .none, attribute: .notAnAttribute, multiplier: 1, constant: 42)
+        let height = NSLayoutConstraint(item: showAgainBtn, attribute: .height, relatedBy: .equal, toItem: showAgainBtn, attribute: .height, multiplier: 1, constant: 0)
 
         contentView.addConstraints([topY, width, height])
 
@@ -466,26 +466,26 @@ class TutorialViewController: AnimatedPagingScrollViewController {
     func didTapOnOffButton() {
         showAgainBtn.checked = !showAgainBtn.checked
         if (showAgainBtn.checked) {
-            showAgainBtn.strokeColor = .greenColor()
+            showAgainBtn.strokeColor = .green
         } else {
-            showAgainBtn.strokeColor = .lightGrayColor()
+            showAgainBtn.strokeColor = .lightGray
         }
     }
 
     func setupLetsGoBtn() {
         contentView.addSubview(letsGoBtn)
-        letsGoBtn.setTitle("Let's Go!", forState: .Normal)
-        letsGoBtn.setTitle("Let's Go!", forState: .Selected)
+        letsGoBtn.setTitle("Let's Go!", for: UIControlState())
+        letsGoBtn.setTitle("Let's Go!", for: .selected)
         letsGoBtn.titleLabel?.font = UIFont(name: "PT Sans", size: 30)
         letsGoBtn.tintColor = UIColor(r: 255, g: 255, b: 255, alpha: 0.4)
         letsGoBtn.cornerRadius = 39
-        letsGoBtn.selected = true
+        letsGoBtn.isSelected = true
 
-        let topY = NSLayoutConstraint(item: letsGoBtn, attribute: .Top, relatedBy: .Equal, toItem: envelopeBack, attribute: .Bottom, multiplier: 1, constant: 48)
-        let width = NSLayoutConstraint(item: letsGoBtn, attribute: .Width, relatedBy: .Equal, toItem: .None, attribute: .NotAnAttribute, multiplier: 1, constant: 200)
-        let height = NSLayoutConstraint(item: letsGoBtn, attribute: .Height, relatedBy: .Equal, toItem: .None, attribute: .NotAnAttribute, multiplier: 1, constant: 80)
+        let topY = NSLayoutConstraint(item: letsGoBtn, attribute: .top, relatedBy: .equal, toItem: envelopeBack, attribute: .bottom, multiplier: 1, constant: 48)
+        let width = NSLayoutConstraint(item: letsGoBtn, attribute: .width, relatedBy: .equal, toItem: .none, attribute: .notAnAttribute, multiplier: 1, constant: 200)
+        let height = NSLayoutConstraint(item: letsGoBtn, attribute: .height, relatedBy: .equal, toItem: .none, attribute: .notAnAttribute, multiplier: 1, constant: 80)
 
-        letsGoBtn.addTarget(self, action: #selector(TutorialViewController.didTapLetsGoBtn), forControlEvents: .TouchUpInside)
+        letsGoBtn.addTarget(self, action: #selector(TutorialViewController.didTapLetsGoBtn), for: .touchUpInside)
 
         contentView.addConstraints([topY, width, height])
 
@@ -496,24 +496,24 @@ class TutorialViewController: AnimatedPagingScrollViewController {
         try! realm.write({
             settings.showTutorial = showAgainBtn.checked
         })
-        let nextVC = storyboard?.instantiateViewControllerWithIdentifier("mainAppRootTabController") as! CustomTabViewController
-        self.presentViewController(nextVC, animated: true, completion: nil)
+        let nextVC = storyboard?.instantiateViewController(withIdentifier: "mainAppRootTabController") as! CustomTabViewController
+        self.present(nextVC, animated: true, completion: nil)
     }
 }
 
-public class PageControlUpdater: Animation<CGFloat>, Animatable {
+open class PageControlUpdater: Animation<CGFloat>, Animatable {
     
-    private let pageControl : UIPageControl
+    fileprivate let pageControl : UIPageControl
     
     public init(pageControl: UIPageControl) {
         self.pageControl = pageControl
     }
     
-    public override func validateValue(value: CGFloat) -> Bool {
+    open override func validateValue(_ value: CGFloat) -> Bool {
         return (value >= 0) && (Int(value) <= pageControl.numberOfPages)
     }
     
-    public func animate(time: CGFloat) {
+    open func animate(_ time: CGFloat) {
         if !hasKeyframes() {return}
         pageControl.currentPage = Int(time)
         pageControl.updateCurrentPageDisplay()

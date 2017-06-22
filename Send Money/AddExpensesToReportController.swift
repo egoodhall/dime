@@ -11,19 +11,19 @@ import RealmSwift
 
 class AddExpensesToReportController: UITableViewController {
 
-    @IBAction func cancel(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("unwindToReportSegue", sender: self)
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "unwindToReportSegue", sender: self)
     }
     
-    @IBAction func commit(sender: UIBarButtonItem) {
+    @IBAction func commit(_ sender: UIBarButtonItem) {
         for row in selectedRows {
             try! realm.write {
-                let expense = self.realm.objectForPrimaryKey(Expense.self, key: self.expenseList[row].id)
+                let expense = self.realm.object(ofType: Expense.self, forPrimaryKey: self.expenseList[row].id)
                 expense?.reportID = self.selectedReport.id
                 self.realm.add(expense!, update: true)
             }
         }
-        self.performSegueWithIdentifier("unwindToReportSegue", sender: self)
+        self.performSegue(withIdentifier: "unwindToReportSegue", sender: self)
     }
     
     var expenseList: [Expense] = []
@@ -37,7 +37,7 @@ class AddExpensesToReportController: UITableViewController {
 
         // Get selected report
         let navC = self.navigationController as! IntermediateNavigationController
-        selectedReport = realm.objectForPrimaryKey(Report.self, key: navC.selectedItemID)
+        selectedReport = realm.object(ofType: Report.self, forPrimaryKey: navC.selectedItemID)
 
         // Custom colors and sizes
         self.navigationController?.navigationBar.barTintColor = .greenTintColor()
@@ -45,31 +45,31 @@ class AddExpensesToReportController: UITableViewController {
         tableView.setEditing(true, animated: true)
 
         // Add navigation buttons
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(AddExpensesToReportController.cancel(_:)))
-        self.navigationItem.setLeftBarButtonItem(cancelButton, animated: true)
-        addButton = UIBarButtonItem(title: "Add", style: .Plain, target: self, action: #selector(AddExpensesToReportController.commit(_:)))
-        self.navigationItem.setRightBarButtonItem(addButton, animated: true)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(AddExpensesToReportController.cancel(_:)))
+        self.navigationItem.setLeftBarButton(cancelButton, animated: true)
+        addButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(AddExpensesToReportController.commit(_:)))
+        self.navigationItem.setRightBarButton(addButton, animated: true)
         self.navigationItem.title = "Add Expenses"
 
         // Get the available expenses
-        let tmpexpenseList = realm.objects(Expense).filter("reportID=''")
+        let tmpexpenseList = realm.objects(Expense.self).filter("reportID=''")
         for expense in tmpexpenseList {
             expenseList.append(expense)
         }
 
         // Sort the list
-        let df = NSDateFormatter()
-        df.dateStyle = .MediumStyle
-        expenseList.sortInPlace {
-            if df.dateFromString($0.date)!.compare(df.dateFromString($1.date)!) == .OrderedSame {
+        let df = DateFormatter()
+        df.dateStyle = .medium
+        expenseList.sort {
+            if df.date(from: $0.date)!.compare(df.date(from: $1.date)!) == .orderedSame {
                 if $0.vendor == $1.vendor {
                     return $0.cost > $1.cost
                 }
                 return $0.vendor < $1.vendor
             }
-            return df.dateFromString($0.date)!.compare(df.dateFromString($1.date)!) == .OrderedDescending
+            return df.date(from: $0.date)!.compare(df.date(from: $1.date)!) == .orderedDescending
         }
-        addButton.enabled = false
+        addButton.isEnabled = false
     }
 
     
@@ -77,26 +77,26 @@ class AddExpensesToReportController: UITableViewController {
     // MARK: - Table view data source
     //-------------------------------
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
         if expenseList.count == 0 {
             messageLabel.text = "No expenses available to attach."
         }
-        messageLabel.textColor = .lightGrayColor()
+        messageLabel.textColor = .lightGray
         messageLabel.numberOfLines = 0
-        messageLabel.textAlignment = NSTextAlignment.Center
-        messageLabel.font = UIFont.systemFontOfSize(20)
+        messageLabel.textAlignment = NSTextAlignment.center
+        messageLabel.font = UIFont.systemFont(ofSize: 20)
         messageLabel.sizeToFit()
         self.tableView.backgroundView = messageLabel;
         return expenseList.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("customExpenseCell", forIndexPath: indexPath) as! CustomExpenseViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customExpenseCell", for: indexPath) as! CustomExpenseViewCell
 
         let expense = expenseList[indexPath.row]
         
@@ -105,45 +105,45 @@ class AddExpensesToReportController: UITableViewController {
         cell.reportLabel.text = ""
         cell.costLabel.text = expense.cost
         cell.costLabel.textColor = .blueTintColor()
-        if expense.imageData.length != 0 {
-            cell.expenseImage.image = UIImage(data: expense.imageData)
+        if expense.imageData.count != 0 {
+            cell.expenseImage.image = UIImage(data: expense.imageData as Data)
         }
 
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if !addButton.enabled {
-            addButton.enabled = true
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !addButton.isEnabled {
+            addButton.isEnabled = true
         }
         selectedRows.append(indexPath.row)
         print(selectedRows)
     }
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         for i in 0 ..< selectedRows.count {
             if selectedRows[i] == indexPath.row {
-                selectedRows.removeAtIndex(i)
+                selectedRows.remove(at: i)
                 break
             }
         }
         if selectedRows.count == 0 {
-            addButton.enabled = false
+            addButton.isEnabled = false
         }
         print(selectedRows)
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if(self.tableView.respondsToSelector(Selector("setSeparatorInset:"))){
-            self.tableView.separatorInset = UIEdgeInsetsZero
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if(self.tableView.responds(to: #selector(setter: UITableViewCell.separatorInset))){
+            self.tableView.separatorInset = UIEdgeInsets.zero
         }
         
-        if(self.tableView.respondsToSelector(Selector("setLayoutMargins:"))){
-            self.tableView.layoutMargins = UIEdgeInsetsZero
+        if(self.tableView.responds(to: #selector(setter: UIView.layoutMargins))){
+            self.tableView.layoutMargins = UIEdgeInsets.zero
         }
         
-        if(cell.respondsToSelector(Selector("setLayoutMargins:"))){
-            cell.layoutMargins = UIEdgeInsetsZero
+        if(cell.responds(to: #selector(setter: UIView.layoutMargins))){
+            cell.layoutMargins = UIEdgeInsets.zero
         }
     }
 }
