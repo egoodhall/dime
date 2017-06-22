@@ -21,7 +21,7 @@ class AnimatedTutorial: AnimatedPagingScrollViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.addSubview(firstLabel)
-        contentView.addConstraint(NSLayoutConstraint(item: firstLabel, attribute: .CenterY, relatedBy: .Equal, toItem: contentView, attribute: .CenterY, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: firstLabel, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0))
         keepView(firstLabel, onPages: [1,2])
         keepView(firstLabel, onPage: 1.25)
     }

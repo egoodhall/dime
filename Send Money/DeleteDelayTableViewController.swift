@@ -15,29 +15,29 @@ class DeleteDelayTableViewController: UITableViewController {
     var settings: Settings!
     
     override func viewDidLoad() {
-        settings = realm.objects(Settings)[0] as Settings
-        for i in 0 ..< tableView.numberOfRowsInSection(0) {
-            self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0))!.accessoryType = .None
+        settings = realm.objects(Settings.self)[0] as Settings
+        for i in 0 ..< tableView.numberOfRows(inSection: 0) {
+            self.tableView.cellForRow(at: IndexPath(row: i, section: 0))!.accessoryType = .none
         }
         updateSelectedRow(settings.deleteIntervalRow)
     }
     
-    func updateSelectedRow(row: Int) {
-        for i in 0 ..< tableView.numberOfRowsInSection(0) {
-            self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0))!.accessoryType = .None
+    func updateSelectedRow(_ row: Int) {
+        for i in 0 ..< tableView.numberOfRows(inSection: 0) {
+            self.tableView.cellForRow(at: IndexPath(row: i, section: 0))!.accessoryType = .none
         }
-        self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: settings.deleteIntervalRow, inSection: 0))?.accessoryType = .None
+        self.tableView.cellForRow(at: IndexPath(row: settings.deleteIntervalRow, section: 0))?.accessoryType = .none
         try! realm.write {
             self.settings.deleteIntervalRow = row
         }
-        self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: settings.deleteIntervalRow, inSection: 0))?.accessoryType = .Checkmark
+        self.tableView.cellForRow(at: IndexPath(row: settings.deleteIntervalRow, section: 0))?.accessoryType = .checkmark
     }
     
     //-------------------------------
     // MARK: - Table view data source
     //-------------------------------
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         updateSelectedRow(indexPath.row)
     }
 }

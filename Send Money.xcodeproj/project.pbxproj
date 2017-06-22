@@ -28,6 +28,7 @@
 		078CBFCD1B818667002BD451 /* TutorialContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078CBFCC1B818667002BD451 /* TutorialContentViewController.swift */; };
 		078CBFCF1B823A84002BD451 /* TutorialRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078CBFCE1B823A84002BD451 /* TutorialRootViewController.swift */; };
 		079443E21B6E9F30000E7FD1 /* DeleteDelayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079443E11B6E9F30000E7FD1 /* DeleteDelayTableViewController.swift */; };
+		07A238301EFB3D3500C56A23 /* MailComposerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A2382F1EFB3D3500C56A23 /* MailComposerVC.swift */; };
 		07B11C111D37DA3400777CAC /* PTSans.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 07B11C101D37DA3400777CAC /* PTSans.ttc */; };
 		07B11C131D37E12100777CAC /* AnimatedTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B11C121D37E12100777CAC /* AnimatedTutorial.swift */; };
 		07D3C6241B6EB45C00FD80D1 /* EmailListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C6231B6EB45C00FD80D1 /* EmailListTableViewController.swift */; };
@@ -36,8 +37,8 @@
 		07E746DF1B65752E00961B61 /* ReportDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E746DE1B65752E00961B61 /* ReportDetailTableViewController.swift */; };
 		07E746E11B659EC000961B61 /* CustomTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E746E01B659EC000961B61 /* CustomTabViewController.swift */; };
 		07ED62721CF4B1600097BFB8 /* PDFGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ED62711CF4B1600097BFB8 /* PDFGenerator.swift */; };
-		1CDF56F563CB20576C901181 /* Pods_Send_Money.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB77A256319621B21D5FFD26 /* Pods_Send_Money.framework */; };
-		A5688587F487CAA8DCC20E8C /* Pods_Send_MoneyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4597DD64B065C1C096280C43 /* Pods_Send_MoneyTests.framework */; };
+		6C9D480282DFFA340C20AA85 /* Pods_Send_MoneyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F620C975B36FF8BE87A2352 /* Pods_Send_MoneyTests.framework */; };
+		C5EBCD65C8F1F00B742DFDFF /* Pods_Send_Money.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80D218AEC69F4E3DB215B02 /* Pods_Send_Money.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04182BAC07F750A800D537C8 /* Pods-Send MoneyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Send MoneyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Send MoneyTests/Pods-Send MoneyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		070333EE1B6DE7280017ED37 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		070557DA1B5EA93800D84A6D /* Send Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Send Money.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		070557DE1B5EA93800D84A6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		078CBFCC1B818667002BD451 /* TutorialContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialContentViewController.swift; sourceTree = "<group>"; };
 		078CBFCE1B823A84002BD451 /* TutorialRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialRootViewController.swift; sourceTree = "<group>"; };
 		079443E11B6E9F30000E7FD1 /* DeleteDelayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteDelayTableViewController.swift; sourceTree = "<group>"; };
+		07A2382F1EFB3D3500C56A23 /* MailComposerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposerVC.swift; sourceTree = "<group>"; };
 		07B11C101D37DA3400777CAC /* PTSans.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = PTSans.ttc; sourceTree = "<group>"; };
 		07B11C121D37E12100777CAC /* AnimatedTutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedTutorial.swift; sourceTree = "<group>"; };
 		07D3C6231B6EB45C00FD80D1 /* EmailListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailListTableViewController.swift; sourceTree = "<group>"; };
@@ -98,12 +101,11 @@
 		07E746DE1B65752E00961B61 /* ReportDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportDetailTableViewController.swift; sourceTree = "<group>"; };
 		07E746E01B659EC000961B61 /* CustomTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabViewController.swift; sourceTree = "<group>"; };
 		07ED62711CF4B1600097BFB8 /* PDFGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFGenerator.swift; sourceTree = "<group>"; };
-		2BBF3ACE3E0C741C56A1FD0F /* Pods-Send Money.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Send Money.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Send Money/Pods-Send Money.debug.xcconfig"; sourceTree = "<group>"; };
-		4597DD64B065C1C096280C43 /* Pods_Send_MoneyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Send_MoneyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4906B70E0E5CB1575BC7885F /* Pods-Send MoneyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Send MoneyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Send MoneyTests/Pods-Send MoneyTests.debug.xcconfig"; sourceTree = "<group>"; };
-		A4D65609C6606AF313E984A4 /* Pods-Send Money.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Send Money.release.xcconfig"; path = "Pods/Target Support Files/Pods-Send Money/Pods-Send Money.release.xcconfig"; sourceTree = "<group>"; };
-		B310D9118159D3BB9F5C9D42 /* Pods-Send MoneyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Send MoneyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Send MoneyTests/Pods-Send MoneyTests.release.xcconfig"; sourceTree = "<group>"; };
-		EB77A256319621B21D5FFD26 /* Pods_Send_Money.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Send_Money.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		238C090DB4A0042E7A6DB5AE /* Pods-Send MoneyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Send MoneyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Send MoneyTests/Pods-Send MoneyTests.release.xcconfig"; sourceTree = "<group>"; };
+		3F620C975B36FF8BE87A2352 /* Pods_Send_MoneyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Send_MoneyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		64CD5C3FE652DF8FCBF606CB /* Pods-Send Money.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Send Money.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Send Money/Pods-Send Money.debug.xcconfig"; sourceTree = "<group>"; };
+		E80D218AEC69F4E3DB215B02 /* Pods_Send_Money.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Send_Money.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F86A549B95BBCFDACF67B8E2 /* Pods-Send Money.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Send Money.release.xcconfig"; path = "Pods/Target Support Files/Pods-Send Money/Pods-Send Money.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +114,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				076B22BA1B6DD0A8004F5DEA /* iAd.framework in Frameworks */,
-				1CDF56F563CB20576C901181 /* Pods_Send_Money.framework in Frameworks */,
+				C5EBCD65C8F1F00B742DFDFF /* Pods_Send_Money.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5688587F487CAA8DCC20E8C /* Pods_Send_MoneyTests.framework in Frameworks */,
+				6C9D480282DFFA340C20AA85 /* Pods_Send_MoneyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,8 +135,8 @@
 				070557DC1B5EA93800D84A6D /* Send Money */,
 				070557F41B5EA93800D84A6D /* Send MoneyTests */,
 				070557DB1B5EA93800D84A6D /* Products */,
-				D243B2F5587075EE24DDE141 /* Pods */,
 				A7927B4CEE89BD88AE36A4A5 /* Frameworks */,
+				F179A80DD53E2F102C365D96 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -226,6 +228,7 @@
 				0705580B1B5EB3CA00D84A6D /* DataTypes.swift */,
 				072557031BA31EEC00A0F4EC /* AFImageExtension.swift */,
 				072557041BA31EEC00A0F4EC /* AFImageVIewExtension.swift */,
+				07A2382F1EFB3D3500C56A23 /* MailComposerVC.swift */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -268,19 +271,19 @@
 			children = (
 				077E25341C0791B6004A86F2 /* RealmSwift.framework */,
 				076B22B91B6DD0A8004F5DEA /* iAd.framework */,
-				EB77A256319621B21D5FFD26 /* Pods_Send_Money.framework */,
-				4597DD64B065C1C096280C43 /* Pods_Send_MoneyTests.framework */,
+				E80D218AEC69F4E3DB215B02 /* Pods_Send_Money.framework */,
+				3F620C975B36FF8BE87A2352 /* Pods_Send_MoneyTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D243B2F5587075EE24DDE141 /* Pods */ = {
+		F179A80DD53E2F102C365D96 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2BBF3ACE3E0C741C56A1FD0F /* Pods-Send Money.debug.xcconfig */,
-				A4D65609C6606AF313E984A4 /* Pods-Send Money.release.xcconfig */,
-				4906B70E0E5CB1575BC7885F /* Pods-Send MoneyTests.debug.xcconfig */,
-				B310D9118159D3BB9F5C9D42 /* Pods-Send MoneyTests.release.xcconfig */,
+				64CD5C3FE652DF8FCBF606CB /* Pods-Send Money.debug.xcconfig */,
+				F86A549B95BBCFDACF67B8E2 /* Pods-Send Money.release.xcconfig */,
+				04182BAC07F750A800D537C8 /* Pods-Send MoneyTests.debug.xcconfig */,
+				238C090DB4A0042E7A6DB5AE /* Pods-Send MoneyTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -292,14 +295,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 070557FB1B5EA93800D84A6D /* Build configuration list for PBXNativeTarget "Send Money" */;
 			buildPhases = (
-				71D35E1F9F30492CB0635154 /* Check Pods Manifest.lock */,
+				D71CBB2CF629694643DCF213 /* [CP] Check Pods Manifest.lock */,
 				070557D61B5EA93800D84A6D /* Sources */,
 				070557D71B5EA93800D84A6D /* Frameworks */,
 				07937C521B79EC39007A6D43 /* Version Tracking */,
 				070557D81B5EA93800D84A6D /* Resources */,
 				070558091B5EB30D00D84A6D /* Embed Frameworks */,
-				8E3A6BAAEFBD824B67F1DB14 /* Embed Pods Frameworks */,
-				1DA7A61E22A9532DC6CB4ED3 /* Copy Pods Resources */,
+				A02F846F78CE9C39A7ED0081 /* [CP] Embed Pods Frameworks */,
+				8109B40AE3108344E139EB1F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -314,12 +317,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 070557FE1B5EA93800D84A6D /* Build configuration list for PBXNativeTarget "Send MoneyTests" */;
 			buildPhases = (
-				4030DB4AD9A3FBF1509778A5 /* Check Pods Manifest.lock */,
+				EAA51F62D9AAAB3D340E0908 /* [CP] Check Pods Manifest.lock */,
 				070557ED1B5EA93800D84A6D /* Sources */,
 				070557EE1B5EA93800D84A6D /* Frameworks */,
 				070557EF1B5EA93800D84A6D /* Resources */,
-				570F6590093A8270251C85D2 /* Embed Pods Frameworks */,
-				9D2639407378916904EB4DE9 /* Copy Pods Resources */,
+				36B57CE11654377E88A05B5D /* [CP] Embed Pods Frameworks */,
+				4859428E0E0D787B7BA84342 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -338,13 +341,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Eric Marshall";
 				TargetAttributes = {
 					070557D91B5EA93800D84A6D = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 3MDMT7M4H8;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;
@@ -353,7 +356,7 @@
 					};
 					070557F01B5EA93800D84A6D = {
 						CreatedOnToolsVersion = 6.4;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 						TestTargetID = 070557D91B5EA93800D84A6D;
 					};
 				};
@@ -413,44 +416,14 @@
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nnewBuildNumber=$(git rev-list HEAD --count)\nnewBuildNumber=$(($newBuildNumber))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $newBuildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n\n\nif ((newBuildNumber > buildNumber)); then\nVERSIONNUM=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nNEWSUBVERSION=`echo $VERSIONNUM | awk -F \".\" '{print $3}'`\nNEWSUBVERSION=$(($NEWSUBVERSION + 1))\nNEWVERSIONSTRING=`echo $VERSIONNUM | awk -F \".\" '{print $1 \".\" $2 \".'$NEWSUBVERSION'\" }'`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $NEWVERSIONSTRING\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\nfi";
 		};
-		1DA7A61E22A9532DC6CB4ED3 /* Copy Pods Resources */ = {
+		36B57CE11654377E88A05B5D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Send Money/Pods-Send Money-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4030DB4AD9A3FBF1509778A5 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		570F6590093A8270251C85D2 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,29 +431,44 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Send MoneyTests/Pods-Send MoneyTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		71D35E1F9F30492CB0635154 /* Check Pods Manifest.lock */ = {
+		4859428E0E0D787B7BA84342 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Send MoneyTests/Pods-Send MoneyTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8E3A6BAAEFBD824B67F1DB14 /* Embed Pods Frameworks */ = {
+		8109B40AE3108344E139EB1F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Send Money/Pods-Send Money-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A02F846F78CE9C39A7ED0081 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,19 +476,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Send Money/Pods-Send Money-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9D2639407378916904EB4DE9 /* Copy Pods Resources */ = {
+		D71CBB2CF629694643DCF213 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Send MoneyTests/Pods-Send MoneyTests-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EAA51F62D9AAAB3D340E0908 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -513,6 +516,7 @@
 				077114881B608E35009CE662 /* CustomExpenseViewCell.swift in Sources */,
 				077114861B603005009CE662 /* IntermediateNavigationController.swift in Sources */,
 				07E746DF1B65752E00961B61 /* ReportDetailTableViewController.swift in Sources */,
+				07A238301EFB3D3500C56A23 /* MailComposerVC.swift in Sources */,
 				070557E41B5EA93800D84A6D /* ReportTableViewController.swift in Sources */,
 				070558101B5EB3CA00D84A6D /* DataTypes.swift in Sources */,
 				0783DA361B695D3100F9E868 /* AddExpensesToReportController.swift in Sources */,
@@ -587,8 +591,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -616,6 +622,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -632,8 +639,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -652,14 +661,17 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		070557FC1B5EA93800D84A6D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2BBF3ACE3E0C741C56A1FD0F /* Pods-Send Money.debug.xcconfig */;
+			baseConfigurationReference = 64CD5C3FE652DF8FCBF606CB /* Pods-Send Money.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -676,7 +688,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.marshall.eric.Send-Money";
 				PRODUCT_NAME = "Send Money";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -684,8 +696,9 @@
 		};
 		070557FD1B5EA93800D84A6D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4D65609C6606AF313E984A4 /* Pods-Send Money.release.xcconfig */;
+			baseConfigurationReference = F86A549B95BBCFDACF67B8E2 /* Pods-Send Money.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -702,7 +715,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.marshall.eric.Send-Money";
 				PRODUCT_NAME = "Send Money";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -710,8 +723,9 @@
 		};
 		070557FF1B5EA93800D84A6D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4906B70E0E5CB1575BC7885F /* Pods-Send MoneyTests.debug.xcconfig */;
+			baseConfigurationReference = 04182BAC07F750A800D537C8 /* Pods-Send MoneyTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -725,15 +739,16 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eric.marshall.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "Send Money";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Send Money.app/Send Money";
 			};
 			name = Debug;
 		};
 		070558001B5EA93800D84A6D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B310D9118159D3BB9F5C9D42 /* Pods-Send MoneyTests.release.xcconfig */;
+			baseConfigurationReference = 238C090DB4A0042E7A6DB5AE /* Pods-Send MoneyTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -743,7 +758,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eric.marshall.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "Send Money";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Send Money.app/Send Money";
 			};
 			name = Release;

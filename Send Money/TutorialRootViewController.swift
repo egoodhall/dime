@@ -20,32 +20,32 @@ class TutorialRootViewController: UIViewController {
         super.viewDidLoad()
         
         if !shownAtBeginning {
-            imageNames.removeAtIndex(0)
+            imageNames.remove(at: 0)
         }
         
-        pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+        pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController.view.backgroundColor = .barTintColor()
         pageViewController.dataSource = self
         
         pageControl = UIPageControl(frame: CGRect(x: 0, y: view.bounds.height - 40, width: view.bounds.width, height: 40))
-        pageControl.backgroundColor = .clearColor()
+        pageControl.backgroundColor = .clear
         
         self.view.addSubview(pageControl)
         
         let firstVC = viewControllerAtIndex(0)!
-        pageViewController.setViewControllers([firstVC], direction: .Forward, animated: true, completion: nil)
+        pageViewController.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         pageViewController!.view.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height + 40)
         
         
         self.addChildViewController(pageViewController!)
         self.view.addSubview(pageViewController!.view)
-        pageViewController!.didMoveToParentViewController(self)
+        pageViewController!.didMove(toParentViewController: self)
     }
 }
 
 extension TutorialRootViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         var index = (viewController as! TutorialContentViewController).page
         
         if (index == 0) || (index == NSNotFound) {
@@ -54,10 +54,10 @@ extension TutorialRootViewController: UIPageViewControllerDataSource, UIPageView
         
         index! -= 1
         
-        return viewControllerAtIndex(index)
+        return viewControllerAtIndex(index!)
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         var index = (viewController as! TutorialContentViewController).page
         
         if index == NSNotFound {
@@ -70,17 +70,17 @@ extension TutorialRootViewController: UIPageViewControllerDataSource, UIPageView
             return nil
         }
         
-        return viewControllerAtIndex(index)
+        return viewControllerAtIndex(index!)
     }
     
-    func viewControllerAtIndex(index: Int) -> TutorialContentViewController? {
+    func viewControllerAtIndex(_ index: Int) -> TutorialContentViewController? {
         
         if self.imageNames.count == 0 || index >= self.imageNames.count {
             return nil
         }
         
         // Create a new view controller and pass suitable data.
-        let pageContentViewController = storyboard?.instantiateViewControllerWithIdentifier("TutorialContentViewController") as! TutorialContentViewController
+        let pageContentViewController = storyboard?.instantiateViewController(withIdentifier: "TutorialContentViewController") as! TutorialContentViewController
         pageContentViewController.page = index
         pageContentViewController.image = UIImage(named: imageNames[index])
         pageContentViewController.shownAtBeginning = shownAtBeginning
@@ -90,11 +90,11 @@ extension TutorialRootViewController: UIPageViewControllerDataSource, UIPageView
         return pageContentViewController
     }
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return self.imageNames.count
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         pageControl.updateCurrentPageDisplay()
         return currentIndex
     }

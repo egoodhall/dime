@@ -37,28 +37,28 @@ class NewExpenseTableViewController: UITableViewController {
      @IBOutlet weak var categoryButton: MaterialButton!
     - Parameter sender: The UIGestureRecognizer that recognizes the touch within the UIImageView
     */
-    @IBAction func didSelectPhoto(sender: UIGestureRecognizer) {
+    @IBAction func didSelectPhoto(_ sender: UIGestureRecognizer) {
         shouldSave = false
         if imageIsDefault && allowImageEditing {
-            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
-            alert.addAction(UIAlertAction(title: "Camera", style: .Default){
+            alert.addAction(UIAlertAction(title: "Camera", style: .default){
                 (Action) in
                 self.getPhoto(true)
                 })
-            alert.addAction(UIAlertAction(title: "Photo Library", style: .Default){
+            alert.addAction(UIAlertAction(title: "Photo Library", style: .default){
                 (Action) in
                 self.getPhoto(false)
                 })
             
-            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
             
-            self.presentViewController(alert, animated: true, completion:  {
+            self.present(alert, animated: true, completion:  {
                 self.shouldSave = true
             })
         } else {
-            self.performSegueWithIdentifier("showImageSegue", sender: self)
+            self.performSegue(withIdentifier: "showImageSegue", sender: self)
         }
     }
 
@@ -67,9 +67,9 @@ class NewExpenseTableViewController: UITableViewController {
     
     - Parameter sender: The UITextField that called the action
     */
-    @IBAction func reformatCostField(sender: UITextField) {
-        let num = (NSString(string: costField.text!.stringByReplacingOccurrencesOfString("[^0-9]", withString: "", options: .RegularExpressionSearch, range: nil)).doubleValue / 100)
-        costField.text = currencyFormatter.stringFromNumber(num)
+    @IBAction func reformatCostField(_ sender: UITextField) {
+        let num = (NSString(string: costField.text!.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression, range: nil)).doubleValue / 100)
+        costField.text = currencyFormatter.string(from: NSNumber(floatLiteral: num))
     }
 
     /**
@@ -77,9 +77,9 @@ class NewExpenseTableViewController: UITableViewController {
 
     - Parameter sender: The UITextField that called the action
     */
-    @IBAction func didSelectCancelButton(sender: UIBarButtonItem) {
+    @IBAction func didSelectCancelButton(_ sender: UIBarButtonItem) {
         shouldSave = false
-        self.performSegueWithIdentifier("cancelExpenseSegue", sender: self)
+        self.performSegue(withIdentifier: "cancelExpenseSegue", sender: self)
     }
 
     /**
@@ -87,9 +87,9 @@ class NewExpenseTableViewController: UITableViewController {
 
     - Parameter sender: The UIBarButtonItem that called the action
     */
-    @IBAction func didSelectExpenseSaveButton(sender: UIBarButtonItem) {
+    @IBAction func didSelectExpenseSaveButton(_ sender: UIBarButtonItem) {
 //        saveData()
-        self.performSegueWithIdentifier("saveExpenseSegue", sender: self)
+        self.performSegue(withIdentifier: "saveExpenseSegue", sender: self)
     }
 
     /**
@@ -97,9 +97,9 @@ class NewExpenseTableViewController: UITableViewController {
 
     - Parameter sender: The UIBarButtonItem that called the action
     */
-    @IBAction func didSelectReportSaveButton(sender: UIBarButtonItem) {
+    @IBAction func didSelectReportSaveButton(_ sender: UIBarButtonItem) {
 //        saveData()
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
 
 
@@ -109,9 +109,9 @@ class NewExpenseTableViewController: UITableViewController {
     weak var activeTextField: UITextField?
 
     /// A NSDateFormatter instance for use in formatting the dateField
-    var dateFormatter = NSDateFormatter()
+    var dateFormatter = DateFormatter()
     /// A NSNumberFormatter instance for formatting the costField
-    var currencyFormatter = NSNumberFormatter()
+    var currencyFormatter = NumberFormatter()
     /// A dictionary of Reports of the form - [Report ID : Report]
     var reports: [String : Report] = [:]
     /// A string meant to temporarily hold data in case the user wants to cancel
@@ -119,7 +119,7 @@ class NewExpenseTableViewController: UITableViewController {
     /// The currently selected row in the reportPicker
     var reportPickerSelectedRow = 0
     /// The current image owned by the Expense
-    var currentImage: NSData!
+    var currentImage: Data!
     /// Whether or not the Expense's image is the default image
     var imageIsDefault = true
     /// The UIDatePicker used by dateField
@@ -157,19 +157,19 @@ class NewExpenseTableViewController: UITableViewController {
             if navC.selectedItemID != nil {
                 self.navigationController?.navigationBar.barTintColor = .greenTintColor()
                 refreshData()
-                let selectedExpense = realm.objectForPrimaryKey(Expense.self, key: navC.selectedItemID)
-                let containingReport = realm.objectForPrimaryKey(Report.self, key: selectedExpense!.reportID)
+                let selectedExpense = realm.object(ofType: Expense.self, forPrimaryKey: navC.selectedItemID)
+                let containingReport = realm.object(ofType: Report.self, forPrimaryKey: selectedExpense!.reportID)
                 if containingReport != nil {
                     reportField.text = containingReport!.name
-                    if containingReport?.status != ReportStatus.Open.rawValue {
+                    if containingReport?.status != ReportStatus.open.rawValue {
                         navigationItem.title = "View Expense"
-                        costField.userInteractionEnabled = false
-                        vendorField.userInteractionEnabled = false
-                        dateField.userInteractionEnabled = false
-                        reportField.userInteractionEnabled = false
-                        detailField.userInteractionEnabled = false
+                        costField.isUserInteractionEnabled = false
+                        vendorField.isUserInteractionEnabled = false
+                        dateField.isUserInteractionEnabled = false
+                        reportField.isUserInteractionEnabled = false
+                        detailField.isUserInteractionEnabled = false
                         allowImageEditing = false
-                        self.navigationItem.setRightBarButtonItem(nil, animated: true)
+                        self.navigationItem.setRightBarButton(nil, animated: true)
                     }
                 }
             }
@@ -177,18 +177,18 @@ class NewExpenseTableViewController: UITableViewController {
         else {
             self.navigationController?.navigationBar.barTintColor = .greenTintColor()
             refreshData()
-            let containingReport = realm.objectForPrimaryKey(Report.self, key: selectedExpense!.reportID)
+            let containingReport = realm.object(ofType: Report.self, forPrimaryKey: selectedExpense!.reportID)
             if containingReport != nil {
                 reportField.text = containingReport!.name
-                if containingReport?.status != ReportStatus.Open.rawValue {
+                if containingReport?.status != ReportStatus.open.rawValue {
                     navigationItem.title = "View Expense"
-                    costField.userInteractionEnabled = false
-                    vendorField.userInteractionEnabled = false
-                    dateField.userInteractionEnabled = false
-                    reportField.userInteractionEnabled = false
-                    detailField.userInteractionEnabled = false
+                    costField.isUserInteractionEnabled = false
+                    vendorField.isUserInteractionEnabled = false
+                    dateField.isUserInteractionEnabled = false
+                    reportField.isUserInteractionEnabled = false
+                    detailField.isUserInteractionEnabled = false
                     allowImageEditing = false
-                    self.navigationItem.setRightBarButtonItem(nil, animated: true)
+                    self.navigationItem.setRightBarButton(nil, animated: true)
                 }
             }
         }
@@ -198,7 +198,7 @@ class NewExpenseTableViewController: UITableViewController {
         costField.textColor = .accentBlueColor()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         shouldSave = true
     }
 
@@ -206,27 +206,27 @@ class NewExpenseTableViewController: UITableViewController {
     Create the buttons to be shown in the Navigaton Bar
     */
     func performButtonSetup() {
-        dateFormatter.dateStyle = .MediumStyle
-        currencyFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-        currencyFormatter.locale = NSLocale(localeIdentifier: "en_US")
-        let items = realm.objects(Report).filter("status==\(ReportStatus.Open.rawValue)")
+        dateFormatter.dateStyle = .medium
+        currencyFormatter.numberStyle = NumberFormatter.Style.currency
+        currencyFormatter.locale = Locale(identifier: "en_US")
+        let items = realm.objects(Report.self).filter("status==\(ReportStatus.open.rawValue)")
         for realmReport in items {
             reports[realmReport.id] = realmReport
         }
         
         if navC == nil {
             self.navigationItem.title = "Expense"
-            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: nil)
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
         } else {
             self.navigationItem.title = "New Expense"
-            let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NewExpenseTableViewController.didSelectCancelButton(_:)))
-            self.navigationItem.setLeftBarButtonItem(cancelButton, animated: true)
+            let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(NewExpenseTableViewController.didSelectCancelButton(_:)))
+            self.navigationItem.setLeftBarButton(cancelButton, animated: true)
         }
         
         if navC != nil  {
-            let saveButton = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NewExpenseTableViewController.didSelectExpenseSaveButton(_:)))
+            let saveButton = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.plain, target: self, action: #selector(NewExpenseTableViewController.didSelectExpenseSaveButton(_:)))
             print("B")
-            self.navigationItem.setRightBarButtonItem(saveButton, animated: true)
+            self.navigationItem.setRightBarButton(saveButton, animated: true)
         }
     }
 
@@ -235,14 +235,14 @@ class NewExpenseTableViewController: UITableViewController {
     */
     func performCostFieldSetup() {
         let costBar: UIToolbar = UIToolbar()
-        costBar.barStyle = UIBarStyle.Default
-        costBar.translucent = true
+        costBar.barStyle = UIBarStyle.default
+        costBar.isTranslucent = true
         costBar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: #selector(NewExpenseTableViewController.doneBar(_:)))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Done, target: self, action: #selector(NewExpenseTableViewController.cancelBar(_:)))
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(NewExpenseTableViewController.doneBar(_:)))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.done, target: self, action: #selector(NewExpenseTableViewController.cancelBar(_:)))
         costBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        costBar.userInteractionEnabled = true
+        costBar.isUserInteractionEnabled = true
         costField.inputAccessoryView = costBar
     }
 
@@ -250,22 +250,22 @@ class NewExpenseTableViewController: UITableViewController {
     Perform all necessary setup for the dateField
     */
     func performDateFieldSetup() {
-        dateField.tintColor = .clearColor()
-        dateField.text = dateFormatter.stringFromDate(NSDate())
+        dateField.tintColor = .clear
+        dateField.text = dateFormatter.string(from: Date())
         datePicker = UIDatePicker()
-        datePicker.datePickerMode = .Date
-        datePicker.addTarget(self, action: #selector(NewExpenseTableViewController.handleDatePicker(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        datePicker.datePickerMode = .date
+        datePicker.addTarget(self, action: #selector(NewExpenseTableViewController.handleDatePicker(_:)), for: UIControlEvents.valueChanged)
         dateField.inputView = datePicker
         
         let dateBar: UIToolbar = UIToolbar()
-        dateBar.barStyle = UIBarStyle.Default
-        dateBar.translucent = true
+        dateBar.barStyle = UIBarStyle.default
+        dateBar.isTranslucent = true
         dateBar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .Done, target: self, action: #selector(NewExpenseTableViewController.doneBar(_:)))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Done, target: self, action: #selector(NewExpenseTableViewController.cancelBar(_:)))
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(NewExpenseTableViewController.doneBar(_:)))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(NewExpenseTableViewController.cancelBar(_:)))
         dateBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        dateBar.userInteractionEnabled = true
+        dateBar.isUserInteractionEnabled = true
         dateField.inputAccessoryView = dateBar
     }
 
@@ -273,7 +273,7 @@ class NewExpenseTableViewController: UITableViewController {
     Perform all necessary setup for the reportField
     */
     func performReportFieldSetup() {
-        reportField.tintColor = .clearColor()
+        reportField.tintColor = .clear
         reportPicker = UIPickerView()
         reportPicker.delegate = self
         reportPicker.dataSource = self
@@ -281,21 +281,21 @@ class NewExpenseTableViewController: UITableViewController {
         reportPicker.selectRow(0, inComponent: 0, animated: false)
         reportField.inputView = reportPicker
         let reportBar: UIToolbar = UIToolbar()
-        reportBar.barStyle = UIBarStyle.Default
-        reportBar.translucent = true
+        reportBar.barStyle = UIBarStyle.default
+        reportBar.isTranslucent = true
         reportBar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .Done, target: self, action: #selector(NewExpenseTableViewController.doneBar(_:)))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Done, target: self, action: #selector(NewExpenseTableViewController.cancelBar(_:)))
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(NewExpenseTableViewController.doneBar(_:)))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(NewExpenseTableViewController.cancelBar(_:)))
         reportBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        reportBar.userInteractionEnabled = true
+        reportBar.isUserInteractionEnabled = true
         reportField.inputAccessoryView = reportBar
     }
 
     /**
     Get the row at which a report with a given ID is at in the reportPicker
     */
-    func getRow(key: String) -> Int {
+    func getRow(_ key: String) -> Int {
         for i in 0 ..< reports.count {
             if key == Array(reports.keys)[i] {
                 return i
@@ -309,8 +309,8 @@ class NewExpenseTableViewController: UITableViewController {
 
     - Parameter sender: The UIDatePicker calling the function
     */
-    func handleDatePicker(sender: UIDatePicker) {
-        dateField.text = dateFormatter.stringFromDate(sender.date)
+    func handleDatePicker(_ sender: UIDatePicker) {
+        dateField.text = dateFormatter.string(from: sender.date)
     }
 
     /**
@@ -318,7 +318,7 @@ class NewExpenseTableViewController: UITableViewController {
     
     - Parameter sender: The object calling the function
     */
-    func doneBar(sender: AnyObject) {
+    func doneBar(_ sender: AnyObject) {
         tableView.endEditing(true)
     }
 
@@ -327,11 +327,11 @@ class NewExpenseTableViewController: UITableViewController {
 
     - Parameter sender: The object calling the function
     */
-    func cancelBar(sender: UIBarButtonItem) {
+    func cancelBar(_ sender: UIBarButtonItem) {
         for textField in [dateField, costField, reportField] {
-            if textField.isFirstResponder() {
-                textField.text = tempCancelString
-                textField.resignFirstResponder()
+            if (textField?.isFirstResponder)! {
+                textField?.text = tempCancelString
+                textField?.resignFirstResponder()
                 break
             }
         }
@@ -342,7 +342,7 @@ class NewExpenseTableViewController: UITableViewController {
 
     - Parameter sender: The object calling the function
     */
-    func storeCancelData(textField: UITextField) {
+    func storeCancelData(_ textField: UITextField) {
         tempCancelString = textField.text!
     }
 
@@ -351,13 +351,13 @@ class NewExpenseTableViewController: UITableViewController {
     */
     func refreshData() {
         if selectedExpense == nil {
-            selectedExpense = realm.objectForPrimaryKey(Expense.self, key: navC.selectedItemID)
+            selectedExpense = realm.object(ofType: Expense.self, forPrimaryKey: navC.selectedItemID)
         }
         vendorField.text = selectedExpense.vendor
         costField.text = selectedExpense.cost
         dateField.text = selectedExpense.date
         detailField.text = selectedExpense.details
-        datePicker.setDate(dateFormatter.dateFromString(selectedExpense.date)!, animated: false)
+        datePicker.setDate(dateFormatter.date(from: selectedExpense.date)!, animated: false)
         reportField.text = reports[selectedExpense.reportID]?.name
         for i in 0 ..< reports.count {
             if reports[Array(reports.keys)[i]]!.id == selectedExpense.reportID {
@@ -366,10 +366,10 @@ class NewExpenseTableViewController: UITableViewController {
                 reportPickerSelectedRow = i + 1
             }
         }
-        if UIImage(data: selectedExpense.imageData) != UIImage(named: "addPhoto") && NSData() != selectedExpense.imageData {
+        if UIImage(data: selectedExpense.imageData as Data) != UIImage(named: "addPhoto") && Data() != selectedExpense.imageData as Data {
             print("Image is not default.")
             imageIsDefault = false
-            expenseImage.image = UIImage(data: selectedExpense.imageData)
+            expenseImage.image = UIImage(data: selectedExpense.imageData as Data)
         }
     }
 
@@ -378,24 +378,23 @@ class NewExpenseTableViewController: UITableViewController {
 
     - Parameter fromCamera: Whether or not the photo will be from the camera
     */
-    func getPhoto(fromCamera: Bool) {
+    func getPhoto(_ fromCamera: Bool) {
         let imgPicker = UIImagePickerController()
         imgPicker.allowsEditing = true
         if fromCamera {
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
-                imgPicker.sourceType = .Camera
-                imgPicker.shouldAutorotate()
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
+                imgPicker.sourceType = .camera
                 imgPicker.showsCameraControls = true
             }
         } else {
-            if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary){
-                imgPicker.sourceType = .PhotoLibrary
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+                imgPicker.sourceType = .photoLibrary
             }
         }
         imgPicker.delegate = self
         imgPicker.allowsEditing = false
         shouldSave = false;
-        self.presentViewController(imgPicker, animated: true, completion: nil)
+        self.present(imgPicker, animated: true, completion: nil)
     }
 
     /**
@@ -437,17 +436,17 @@ class NewExpenseTableViewController: UITableViewController {
     // MARK: - Table view data source
     //-------------------------------
 
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if(self.tableView.respondsToSelector(Selector("setSeparatorInset:"))){
-            self.tableView.separatorInset = UIEdgeInsetsZero
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if(self.tableView.responds(to: #selector(setter: UITableViewCell.separatorInset))){
+            self.tableView.separatorInset = UIEdgeInsets.zero
         }
         
-        if(self.tableView.respondsToSelector(Selector("setLayoutMargins:"))){
-            self.tableView.layoutMargins = UIEdgeInsetsZero
+        if(self.tableView.responds(to: #selector(setter: UIView.layoutMargins))){
+            self.tableView.layoutMargins = UIEdgeInsets.zero
         }
         
-        if(cell.respondsToSelector(Selector("setLayoutMargins:"))){
-            cell.layoutMargins = UIEdgeInsetsZero
+        if(cell.responds(to: #selector(setter: UIView.layoutMargins))){
+            cell.layoutMargins = UIEdgeInsets.zero
         }
     }
 
@@ -455,22 +454,22 @@ class NewExpenseTableViewController: UITableViewController {
     // MARK: - Navigation
     //-------------------
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showImageSegue" {
-            let destVC = segue.destinationViewController as! ExpenseImageViewController
+            let destVC = segue.destination as! ExpenseImageViewController
             destVC.image = expenseImage.image
             destVC.allowImageEditing = self.allowImageEditing
         }
     }
     
-    @IBAction func doneWithImageSegue(sender: UIStoryboardSegue) {
+    @IBAction func doneWithImageSegue(_ sender: UIStoryboardSegue) {
     }
 }
 
 
-extension NewExpenseTableViewController: UINavigationControllerDelegate {
+extension NewExpenseTableViewController {
     
-    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
 //        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
     }
 }
@@ -478,8 +477,8 @@ extension NewExpenseTableViewController: UINavigationControllerDelegate {
 
 extension NewExpenseTableViewController: UIImagePickerControllerDelegate {
     
-    func imagePickerController(picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [String: AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [String: Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
             self.imageIsDefault = false
@@ -491,17 +490,17 @@ extension NewExpenseTableViewController: UIImagePickerControllerDelegate {
             //            var transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
             
             self.expenseImage.image = croppedImage
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
-    func scaleAndRotateImage(image: UIImage) -> UIImage {
+    func scaleAndRotateImage(_ image: UIImage) -> UIImage {
         let kMaxResolution: CGFloat = 640
-        let imgRef: CGImageRef = image.CGImage!
-        let width: CGFloat = CGFloat(CGImageGetWidth(imgRef))
-        let height: CGFloat = CGFloat(CGImageGetHeight(imgRef))
-        var transform: CGAffineTransform = CGAffineTransformIdentity
-        var bounds: CGRect = CGRectMake(0, 0, width, height)
+        let imgRef: CGImage = image.cgImage!
+        let width: CGFloat = CGFloat(imgRef.width)
+        let height: CGFloat = CGFloat(imgRef.height)
+        var transform: CGAffineTransform = CGAffineTransform.identity
+        var bounds: CGRect = CGRect(x: 0, y: 0, width: width, height: height)
         if width > kMaxResolution || height > kMaxResolution {
             let ratio: CGFloat = width / height
             if ratio > 1 {
@@ -514,60 +513,60 @@ extension NewExpenseTableViewController: UIImagePickerControllerDelegate {
             }
         }
         let scaleRatio: CGFloat = bounds.size.width / width
-        let imageSize: CGSize = CGSizeMake(CGFloat(CGImageGetWidth(imgRef)), CGFloat(CGImageGetHeight(imgRef)))
+        let imageSize: CGSize = CGSize(width: CGFloat(imgRef.width), height: CGFloat(imgRef.height))
         var boundHeight: CGFloat
         let orient: UIImageOrientation = image.imageOrientation
         switch orient {
-        case UIImageOrientation.Up:
-            transform = CGAffineTransformIdentity
-        case UIImageOrientation.UpMirrored:
-            transform = CGAffineTransformMakeTranslation(imageSize.width, 0.0)
-            transform = CGAffineTransformScale(transform, -1.0, 1.0)
-        case UIImageOrientation.Down:
-            transform = CGAffineTransformMakeTranslation(imageSize.width, imageSize.height)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI))
-        case UIImageOrientation.DownMirrored:
-            transform = CGAffineTransformMakeTranslation(0.0, imageSize.height)
-            transform = CGAffineTransformScale(transform, 1.0, -1.0)
-        case UIImageOrientation.LeftMirrored:
+        case UIImageOrientation.up:
+            transform = CGAffineTransform.identity
+        case UIImageOrientation.upMirrored:
+            transform = CGAffineTransform(translationX: imageSize.width, y: 0.0)
+            transform = transform.scaledBy(x: -1.0, y: 1.0)
+        case UIImageOrientation.down:
+            transform = CGAffineTransform(translationX: imageSize.width, y: imageSize.height)
+            transform = transform.rotated(by: CGFloat(Double.pi))
+        case UIImageOrientation.downMirrored:
+            transform = CGAffineTransform(translationX: 0.0, y: imageSize.height)
+            transform = transform.scaledBy(x: 1.0, y: -1.0)
+        case UIImageOrientation.leftMirrored:
             boundHeight = bounds.size.height
             bounds.size.height = bounds.size.width
             bounds.size.width = boundHeight
-            transform = CGAffineTransformMakeTranslation(imageSize.height, imageSize.width)
-            transform = CGAffineTransformScale(transform, -1.0, 1.0)
-            transform = CGAffineTransformRotate(transform, CGFloat(3.0 * M_PI / 2.0))
-        case UIImageOrientation.Left:
+            transform = CGAffineTransform(translationX: imageSize.height, y: imageSize.width)
+            transform = transform.scaledBy(x: -1.0, y: 1.0)
+            transform = transform.rotated(by: CGFloat(3.0 * .pi / 2.0))
+        case UIImageOrientation.left:
             boundHeight = bounds.size.height
             bounds.size.height = bounds.size.width
             bounds.size.width = boundHeight
-            transform = CGAffineTransformMakeTranslation(0.0, imageSize.width)
-            transform = CGAffineTransformRotate(transform, CGFloat(3.0 * M_PI / 2.0))
-        case UIImageOrientation.RightMirrored:
+            transform = CGAffineTransform(translationX: 0.0, y: imageSize.width)
+            transform = transform.rotated(by: CGFloat(3.0 * .pi / 2.0))
+        case UIImageOrientation.rightMirrored:
             boundHeight = bounds.size.height
             bounds.size.height = bounds.size.width
             bounds.size.width = boundHeight
-            transform = CGAffineTransformMakeScale(-1.0, 1.0)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI / 2.0))
-        case UIImageOrientation.Right:
+            transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+            transform = transform.rotated(by: CGFloat(.pi / 2.0))
+        case UIImageOrientation.right:
             boundHeight = bounds.size.height
             bounds.size.height = bounds.size.width
             bounds.size.width = boundHeight
-            transform = CGAffineTransformMakeTranslation(imageSize.height, 0.0)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI / 2.0))
+            transform = CGAffineTransform(translationX: imageSize.height, y: 0.0)
+            transform = transform.rotated(by: CGFloat(.pi / 2.0))
         }
         UIGraphicsBeginImageContext(bounds.size)
-        let context: CGContextRef = UIGraphicsGetCurrentContext()!
-        if orient == UIImageOrientation.Right || orient == UIImageOrientation.Left {
-            CGContextScaleCTM(context, -scaleRatio, scaleRatio)
-            CGContextTranslateCTM(context, -height, 0)
+        let context: CGContext = UIGraphicsGetCurrentContext()!
+        if orient == UIImageOrientation.right || orient == UIImageOrientation.left {
+            context.scaleBy(x: -scaleRatio, y: scaleRatio)
+            context.translateBy(x: -height, y: 0)
         }
         else {
-            CGContextScaleCTM(context, scaleRatio, -scaleRatio)
-            CGContextTranslateCTM(context, 0, -height)
+            context.scaleBy(x: scaleRatio, y: -scaleRatio)
+            context.translateBy(x: 0, y: -height)
         }
-        CGContextConcatCTM(context, transform)
-        CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, width, height), imgRef)
-        let imageCopy: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        context.concatenate(transform)
+        UIGraphicsGetCurrentContext()?.draw(imgRef, in: CGRect(x: 0, y: 0, width: width, height: height))
+        let imageCopy: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return imageCopy
     }
@@ -576,7 +575,7 @@ extension NewExpenseTableViewController: UIImagePickerControllerDelegate {
 
 extension NewExpenseTableViewController:  UIPickerViewDataSource, UIPickerViewDelegate {
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         reportPickerSelectedRow = row
         if row == 0 {
             reportField.text = ""
@@ -585,15 +584,15 @@ extension NewExpenseTableViewController:  UIPickerViewDataSource, UIPickerViewDe
         }
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return reports.count + 1
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if row == 0 {
             return "Unattached"
         }
@@ -604,12 +603,12 @@ extension NewExpenseTableViewController:  UIPickerViewDataSource, UIPickerViewDe
 
 extension NewExpenseTableViewController: UITextFieldDelegate {
     
-    @IBAction func textFieldDidReturn(textField: UITextField!) {
+    @IBAction func textFieldDidReturn(_ textField: UITextField!) {
         textField.resignFirstResponder()
         self.activeTextField = nil
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if (self.activeTextField != nil)
         {
             self.activeTextField?.resignFirstResponder()
@@ -617,25 +616,25 @@ extension NewExpenseTableViewController: UITextFieldDelegate {
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         if shouldSave {
             if selectedExpense == nil || selectedExpense.reportID == "" {
                 print("Selected expense was nil")
                 saveData()
-            } else if let report = realm.objectForPrimaryKey(Report.self, key: selectedExpense.reportID) {
-                if report.status == ReportStatus.Open.rawValue {
+            } else if let report = realm.object(ofType: Report.self, forPrimaryKey: selectedExpense.reportID) {
+                if report.status == ReportStatus.open.rawValue {
                     print("Selected expense was not nil")
                     saveData()
                 }
             }
         }
         super.viewWillDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func performGenTextFieldSetup() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NewExpenseTableViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NewExpenseTableViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NewExpenseTableViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NewExpenseTableViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         addTargetsToTextField(vendorField)
         addTargetsToTextField(costField)
         addTargetsToTextField(dateField)
@@ -643,41 +642,41 @@ extension NewExpenseTableViewController: UITextFieldDelegate {
         addTargetsToTextField(detailField)
     }
     
-    func addTargetsToTextField(textField: UITextField) {
-        textField.addTarget(self, action: #selector(NewExpenseTableViewController.textFieldDidReturn(_:)), forControlEvents: .EditingDidEndOnExit)
-        textField.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidBeginEditing(_:)), forControlEvents: .EditingDidBegin)
-        textField.addTarget(self, action: #selector(NewExpenseTableViewController.storeCancelData(_:)), forControlEvents: .EditingDidBegin)
+    func addTargetsToTextField(_ textField: UITextField) {
+        textField.addTarget(self, action: #selector(NewExpenseTableViewController.textFieldDidReturn(_:)), for: .editingDidEndOnExit)
+        textField.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidBeginEditing(_:)), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(NewExpenseTableViewController.storeCancelData(_:)), for: .editingDidBegin)
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: Foundation.Notification) {
         self.keyboardIsShowing = true
         if let info = notification.userInfo {
-            self.keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+            self.keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             self.arrangeViewOffsetFromKeyboard()
         }
         
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Foundation.Notification) {
         self.keyboardIsShowing = false
         self.returnViewToInitialFrame()
     }
     
     func arrangeViewOffsetFromKeyboard() {
-        let theApp: UIApplication = UIApplication.sharedApplication()
+        let theApp: UIApplication = UIApplication.shared
         let windowView: UIView? = theApp.delegate!.window!
         if self.activeTextField != nil {
-            let textFieldLowerPoint: CGPoint = CGPointMake(self.activeTextField!.frame.origin.x, self.activeTextField!.frame.origin.y + self.activeTextField!.frame.size.height)
+            let textFieldLowerPoint: CGPoint = CGPoint(x: self.activeTextField!.frame.origin.x, y: self.activeTextField!.frame.origin.y + self.activeTextField!.frame.size.height)
             
-            let convertedTextFieldLowerPoint: CGPoint = self.view.convertPoint(textFieldLowerPoint, toView: windowView)
+            let convertedTextFieldLowerPoint: CGPoint = self.view.convert(textFieldLowerPoint, to: windowView)
             
-            let targetTextFieldLowerPoint: CGPoint = CGPointMake(self.activeTextField!.frame.origin.x, self.keyboardFrame.origin.y - kPreferredTextFieldToKeyboardOffset)
+            let targetTextFieldLowerPoint: CGPoint = CGPoint(x: self.activeTextField!.frame.origin.x, y: self.keyboardFrame.origin.y - kPreferredTextFieldToKeyboardOffset)
             
             let targetPointOffset: CGFloat = targetTextFieldLowerPoint.y - convertedTextFieldLowerPoint.y
-            let adjustedViewFrameCenter: CGPoint = CGPointMake(self.view.center.x, self.view.center.y + targetPointOffset)
+            let adjustedViewFrameCenter: CGPoint = CGPoint(x: self.view.center.x, y: self.view.center.y + targetPointOffset)
             
             if self.keyboardFrame.origin.y < (self.activeTextField!.frame.origin.y + 50) {
-                UIView.animateWithDuration(0.2, animations: {
+                UIView.animate(withDuration: 0.2, animations: {
                     self.view.center = adjustedViewFrameCenter
                 })
             }
@@ -685,17 +684,17 @@ extension NewExpenseTableViewController: UITextFieldDelegate {
     }
     
     func returnViewToInitialFrame() {
-        let initialViewRect: CGRect = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height)
+        let initialViewRect: CGRect = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.height)
         
-        if (!CGRectEqualToRect(initialViewRect, self.view.frame))
+        if (!initialViewRect.equalTo(self.view.frame))
         {
-            UIView.animateWithDuration(0.2, animations: {
+            UIView.animate(withDuration: 0.2, animations: {
                 self.view.frame = initialViewRect
             });
         }
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextField = textField
         
         if(self.keyboardIsShowing)
@@ -704,7 +703,7 @@ extension NewExpenseTableViewController: UITextFieldDelegate {
         }
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         doneBar(textField)
         return false
     }
@@ -716,13 +715,13 @@ class SplitViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundView = SplitLineView()
-        self.backgroundColor = .whiteColor()
+        self.backgroundColor = .white
     }
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         self.backgroundView = SplitLineView()
-        self.backgroundColor = .whiteColor()
+        self.backgroundColor = .white
     }
 }
 
@@ -731,34 +730,34 @@ class BottomLineCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundView = BottomLineView()
-        self.backgroundColor = .whiteColor()
+        self.backgroundColor = .white
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         self.backgroundView = BottomLineView()
-        self.backgroundColor = .whiteColor()
+        self.backgroundColor = .white
     }
 }
 
 class SplitLineView: UIView {
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetRGBFillColor(context, 1.0, 1.0, 1.0, 1.0)
-        CGContextFillRect(context, CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
-        CGContextSetRGBFillColor(context, 0.85, 0.85, 0.85, 1.0)
-        CGContextFillRect(context, CGRect(x: bounds.width / 2, y: 0, width: 0.8, height: bounds.height))
+        context?.setFillColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        context?.fill(CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
+        context?.setFillColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
+        context?.fill(CGRect(x: bounds.width / 2, y: 0, width: 0.8, height: bounds.height))
     }
 }
 
 class BottomLineView: UIView {
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetRGBFillColor(context, 1.0, 1.0, 1.0, 1.0)
-        CGContextFillRect(context, CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
-        CGContextSetRGBFillColor(context, 0.85, 0.85, 0.85, 1.85)
-        CGContextFillRect(context, CGRect(x: 0, y: bounds.height - 1, width: bounds.width, height: 1))
+        context?.setFillColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        context?.fill(CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
+        context?.setFillColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.85)
+        context?.fill(CGRect(x: 0, y: bounds.height - 1, width: bounds.width, height: 1))
     }
 }

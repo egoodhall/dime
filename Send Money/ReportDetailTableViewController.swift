@@ -14,38 +14,38 @@ import MessageUI
 
 class ReportDetailTableViewController: UITableViewController {
     
-    @IBAction func didSelectAddButton(sender: AnyObject) {
-        self.performSegueWithIdentifier("addExpensesToReportSegue", sender: self)
+    @IBAction func didSelectAddButton(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "addExpensesToReportSegue", sender: self)
     }
     
-    @IBAction func didSelectSubmitButton(sender: UIButton) {
-        if selectedReport.status == ReportStatus.Open.rawValue {
-            let alert = UIAlertController(title: "Submit?", message: "Reports cannot be changed after they are submitted", preferredStyle: .Alert)
+    @IBAction func didSelectSubmitButton(_ sender: UIButton) {
+        if selectedReport.status == ReportStatus.open.rawValue {
+            let alert = UIAlertController(title: "Submit?", message: "Reports cannot be changed after they are submitted", preferredStyle: .alert)
 
-            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
-            alert.addAction(UIAlertAction(title: "Submit", style: .Destructive){
+            alert.addAction(UIAlertAction(title: "Submit", style: .destructive){
                 (Action) in
                 self.sendMail()
             })
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         } else {
             self.sendMail()
         }
     }
     
-    @IBAction func didSelectDeleteButton(sender: UIBarButtonItem) {
+    @IBAction func didSelectDeleteButton(_ sender: UIBarButtonItem) {
         
         if self.selectedRows.count > 0{
         
-            let deleteOptionsAlert = UIAlertController(title: "Delete", message: "Would you like to detach the expenses from this report or delete them permanently?", preferredStyle: .Alert)
+            let deleteOptionsAlert = UIAlertController(title: "Delete", message: "Would you like to detach the expenses from this report or delete them permanently?", preferredStyle: .alert)
             
-            deleteOptionsAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive){
+            deleteOptionsAlert.addAction(UIAlertAction(title: "Delete", style: .destructive){
                 (Action) in
                 for row in self.selectedRows {
                     try! self.realm.write {
-                        self.realm.delete(self.realm.objectForPrimaryKey(Expense.self, key: self.expenseList[row].id)!)
+                        self.realm.delete(self.realm.object(ofType: Expense.self, forPrimaryKey: self.expenseList[row].id)!)
                     }
                 }
                 self.deselectAll()
@@ -53,11 +53,11 @@ class ReportDetailTableViewController: UITableViewController {
                 self.updateBars()
             })
         
-            deleteOptionsAlert.addAction(UIAlertAction(title: "Detach", style: .Default){
+            deleteOptionsAlert.addAction(UIAlertAction(title: "Detach", style: .default){
                 (Action) in
                 for row in self.selectedRows {
                     try! self.realm.write {
-                        self.realm.objectForPrimaryKey(Expense.self, key: self.expenseList[row].id)!.reportID = ""
+                        self.realm.object(ofType: Expense.self, forPrimaryKey: self.expenseList[row].id)!.reportID = ""
                     }
                 }
                 self.deselectAll()
@@ -65,39 +65,39 @@ class ReportDetailTableViewController: UITableViewController {
                 self.updateBars()
                 })
             
-            self.presentViewController(deleteOptionsAlert, animated: true, completion: nil)
+            self.present(deleteOptionsAlert, animated: true, completion: nil)
         } else {
             self.deselectAll()
         }
     }
     
-    @IBAction func didSelectReportTitle(sender: AnyObject) {
-        let alert = UIAlertController(title: "Edit Report Name", message: "", preferredStyle: .Alert)
-        alert.addTextFieldWithConfigurationHandler {
+    @IBAction func didSelectReportTitle(_ sender: AnyObject) {
+        let alert = UIAlertController(title: "Edit Report Name", message: "", preferredStyle: .alert)
+        alert.addTextField {
             (textField) in
             textField.placeholder = "Report Name"
             textField.text = self.selectedReport.name
         }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Save", style: .Default) {
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Save", style: .default) {
             (Action) in
             var textFields = alert.textFields as [UITextField]!
             try! self.realm.write {
-                self.selectedReport.name = textFields[0].text!
+                self.selectedReport.name = textFields![0].text!
             }
             self.refreshData()
         })
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func didSelectMarkPaidButton(sender: UIBarButtonItem) {
+    @IBAction func didSelectMarkPaidButton(_ sender: UIBarButtonItem) {
         try! realm.write {
-            self.selectedReport.deleteDateAndTime = NSDate()
-            self.selectedReport.status = ReportStatus.Paid.rawValue
+            self.selectedReport.deleteDateAndTime = Date()
+            self.selectedReport.status = ReportStatus.paid.rawValue
         }
         updateBars()
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBOutlet weak var submitButton: UIButton!
@@ -107,7 +107,7 @@ class ReportDetailTableViewController: UITableViewController {
     @IBOutlet weak var totalLabel: UILabel!
     
     let realm = try! Realm()
-    let nf = NSNumberFormatter()
+    let nf = NumberFormatter()
     var selectedReport: Report!
     var expenseList: [Expense] = []
     var selectedRows: [Int] = []
@@ -119,14 +119,14 @@ class ReportDetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nf.locale = NSLocale(localeIdentifier: "en_US")
-        nf.numberStyle = .CurrencyStyle
+        nf.locale = Locale(identifier: "en_US")
+        nf.numberStyle = .currency
         
-        if selectedReport.status == ReportStatus.Open.rawValue {
-            let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ReportDetailTableViewController.didSelectAddButton(_:)))
-            self.navigationItem.setRightBarButtonItem(addButton, animated: true)
+        if selectedReport.status == ReportStatus.open.rawValue {
+            let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ReportDetailTableViewController.didSelectAddButton(_:)))
+            self.navigationItem.setRightBarButton(addButton, animated: true)
         } else {
-            reportTitle.userInteractionEnabled = false
+            reportTitle.isUserInteractionEnabled = false
         }
         
         totalCostLabel.textColor = .greenTintColor()
@@ -135,13 +135,13 @@ class ReportDetailTableViewController: UITableViewController {
         updateBars()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         self.navigationController?.navigationBar.barTintColor = .greenTintColor()
         tableView.reloadData()
         
-        for i in 0 ..< tableView.numberOfRowsInSection(0) {
-            tableView.deselectRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0), animated: false)
+        for i in 0 ..< tableView.numberOfRows(inSection: 0) {
+            tableView.deselectRow(at: IndexPath(row: i, section: 0), animated: false)
         }
         
 
@@ -150,44 +150,44 @@ class ReportDetailTableViewController: UITableViewController {
     }
 
     func updateBars() {
-        if tableView.editing {
-            let deleteButton = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(ReportDetailTableViewController.didSelectDeleteButton(_:)))
-            self.navigationItem.setRightBarButtonItem(deleteButton, animated: true)
+        if tableView.isEditing {
+            let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(ReportDetailTableViewController.didSelectDeleteButton(_:)))
+            self.navigationItem.setRightBarButton(deleteButton, animated: true)
         }
         else {
-            if selectedReport.status == ReportStatus.Open.rawValue {
-                let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ReportDetailTableViewController.didSelectAddButton(_:)))
-                self.navigationItem.setRightBarButtonItem(addButton, animated: true)
+            if selectedReport.status == ReportStatus.open.rawValue {
+                let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ReportDetailTableViewController.didSelectAddButton(_:)))
+                self.navigationItem.setRightBarButton(addButton, animated: true)
             }
         }
         if expenseList.count == 0 {
             submitButton.alpha = 0.0
-            submitButton.userInteractionEnabled = false
+            submitButton.isUserInteractionEnabled = false
         } else {
             submitButton.alpha = 1.0
-            submitButton.userInteractionEnabled = true
+            submitButton.isUserInteractionEnabled = true
         }
     }
     
     func refreshData() {
-        reportTitle.setTitle(selectedReport.name, forState: .Normal)
-        reportTitle.setTitle(selectedReport.name, forState: .Selected)
+        reportTitle.setTitle(selectedReport.name, for: UIControlState())
+        reportTitle.setTitle(selectedReport.name, for: .selected)
         
         var prevExpenseList = expenseList
         expenseList = []
         
-        for expense in realm.objects(Expense).filter("reportID='\(selectedReport.id)'") {
+        for expense in realm.objects(Expense.self).filter("reportID='\(selectedReport.id)'") {
             expenseList.append(expense)
         }
-        let df = NSDateFormatter()
-        df.dateStyle = .MediumStyle
-        expenseList.sortInPlace {
+        let df = DateFormatter()
+        df.dateStyle = .medium
+        expenseList.sort {
             if $0.vendor == $1.vendor {
                 if $0.cost == $1.cost {
-                    if df.dateFromString($0.date)!.compare(df.dateFromString($1.date)!) == .OrderedSame {
+                    if df.date(from: $0.date)!.compare(df.date(from: $1.date)!) == .orderedSame {
                         return $0.id < $1.id
                     }
-                    return df.dateFromString($0.date)!.compare(df.dateFromString($1.date)!) == .OrderedDescending
+                    return df.date(from: $0.date)!.compare(df.date(from: $1.date)!) == .orderedDescending
                 }
                 return $0.cost > $1.cost
             }
@@ -196,38 +196,38 @@ class ReportDetailTableViewController: UITableViewController {
         
         print("\(prevExpenseList.count) -> \(expenseList.count)")
         
-        var indexPaths: [NSIndexPath] = []
+        var indexPaths: [IndexPath] = []
         
         if prevExpenseList.count == expenseList.count {
             for i in 0 ..< expenseList.count {
-                indexPaths.append(NSIndexPath(forRow: i, inSection: 0))
+                indexPaths.append(IndexPath(row: i, section: 0))
             }
-            tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+            tableView.reloadRows(at: indexPaths, with: .automatic)
         }
         else if prevExpenseList.count > expenseList.count {
                 for i in 0 ..< prevExpenseList.count {
                     if !expenseList.contains(prevExpenseList[i]){
-                        indexPaths.append(NSIndexPath(forRow: i, inSection: 0))
+                        indexPaths.append(IndexPath(row: i, section: 0))
                     }
                 }
-            tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+            tableView.deleteRows(at: indexPaths, with: .automatic)
         }
         else {
             for i in 0 ..< expenseList.count {
                 if !prevExpenseList.contains(expenseList[i]) {
-                    indexPaths.append(NSIndexPath(forRow: i, inSection: 0))
+                    indexPaths.append(IndexPath(row: i, section: 0))
                 }
             }
-            tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+            tableView.insertRows(at: indexPaths, with: .automatic)
         }
         
         if expenseList.count > 0 {
             totalLabel.text = "Total:"
             var reportCost = 0.0
             for i in 0 ..< expenseList.count {
-                reportCost += (NSString(string: expenseList[i].cost.stringByReplacingOccurrencesOfString("[^0-9]", withString: "", options: .RegularExpressionSearch, range: nil)).doubleValue / 100)
+                reportCost += (NSString(string: expenseList[i].cost.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression, range: nil)).doubleValue / 100)
             }
-            totalCostLabel.text = nf.stringFromNumber(reportCost)!
+            totalCostLabel.text = nf.string(from: NSNumber(floatLiteral: reportCost))!
         } else {
             totalCostLabel.text = ""
             totalLabel.text = ""
@@ -236,7 +236,7 @@ class ReportDetailTableViewController: UITableViewController {
     
     func deselectAll() {
         for i in 0 ..< expenseList.count {
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0))?.setSelected(false, animated: true)
+            tableView.cellForRow(at: IndexPath(row: i, section: 0))?.setSelected(false, animated: true)
         }
         selectedRows = []
     }
@@ -246,30 +246,30 @@ class ReportDetailTableViewController: UITableViewController {
     // MARK: - Table view data source
     //-------------------------------
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
         if expenseList.count == 0 {
-            if selectedReport.status == ReportStatus.Open.rawValue {
+            if selectedReport.status == ReportStatus.open.rawValue {
                 messageLabel.text = "Tap '+' to add Expenses to the current Report."
             } else {
                 messageLabel.text = "No Expenses to display"
             }
         }
-        messageLabel.textColor = .lightGrayColor()
+        messageLabel.textColor = .lightGray
         messageLabel.numberOfLines = 0
-        messageLabel.textAlignment = NSTextAlignment.Center
-        messageLabel.font = UIFont.systemFontOfSize(20)
+        messageLabel.textAlignment = NSTextAlignment.center
+        messageLabel.font = UIFont.systemFont(ofSize: 20)
         messageLabel.sizeToFit()
         self.tableView.backgroundView = messageLabel;
         return expenseList.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("customExpenseCell", forIndexPath: indexPath) as! CustomExpenseViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customExpenseCell", for: indexPath) as! CustomExpenseViewCell
 
         let expense = expenseList[indexPath.row]
         
@@ -278,67 +278,67 @@ class ReportDetailTableViewController: UITableViewController {
         cell.reportLabel.text = ""
         cell.costLabel.text = expense.cost
         cell.costLabel.textColor = .accentBlueColor()
-        if expense.imageData.length != 0 {
-            cell.expenseImage.image = UIImage(data: expense.imageData)
+        if expense.imageData.count != 0 {
+            cell.expenseImage.image = UIImage(data: expense.imageData as Data)
         }
         
         
         return cell
     }
 
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if selectedReport.status != ReportStatus.Open.rawValue {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if selectedReport.status != ReportStatus.open.rawValue {
             return false
         }
         return true
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView.editing {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.isEditing {
             selectedRows.append(indexPath.row)
         } else {
             selectedRow = indexPath.row
-            self.performSegueWithIdentifier("didSelectExpenseSegue", sender: self)
+            self.performSegue(withIdentifier: "didSelectExpenseSegue", sender: self)
         }
     }
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView.editing {
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if tableView.isEditing {
             for i in 0 ..< selectedRows.count {
                 if selectedRows[i] == indexPath.row {
-                    selectedRows.removeAtIndex(i)
+                    selectedRows.remove(at: i)
                     break
                 }
             }
         }
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if(self.tableView.respondsToSelector(Selector("setSeparatorInset:"))){
-            self.tableView.separatorInset = UIEdgeInsetsZero
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if(self.tableView.responds(to: #selector(setter: UITableViewCell.separatorInset))){
+            self.tableView.separatorInset = UIEdgeInsets.zero
         }
         
-        if(self.tableView.respondsToSelector(Selector("setLayoutMargins:"))){
-            self.tableView.layoutMargins = UIEdgeInsetsZero
+        if(self.tableView.responds(to: #selector(setter: UIView.layoutMargins))){
+            self.tableView.layoutMargins = UIEdgeInsets.zero
         }
         
-        if(cell.respondsToSelector(Selector("setLayoutMargins:"))){
-            cell.layoutMargins = UIEdgeInsetsZero
+        if(cell.responds(to: #selector(setter: UIView.layoutMargins))){
+            cell.layoutMargins = UIEdgeInsets.zero
         }
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        if selectedReport.status == ReportStatus.Open.rawValue {
+        if selectedReport.status == ReportStatus.open.rawValue {
             
-            let deleteAction = UITableViewRowAction(style: .Default, title: "Delete"){ Action in
+            let deleteAction = UITableViewRowAction(style: .default, title: "Delete"){ Action in
                 self.selectedRows.append(indexPath.row)
                 for row in self.selectedRows {
                     try! self.realm.write {
-                        self.realm.delete(self.realm.objectForPrimaryKey(Expense.self, key: self.expenseList[row].id)!)
+                        self.realm.delete(self.realm.object(ofType: Expense.self, forPrimaryKey: self.expenseList[row].id)!)
                     }
                 }
                 self.deselectAll()
@@ -348,11 +348,11 @@ class ReportDetailTableViewController: UITableViewController {
             
 //            deleteAction.backgroundColor = .redTintColor()
             
-            let detachAction = UITableViewRowAction(style: .Default, title: "Detach"){ Action in
+            let detachAction = UITableViewRowAction(style: .default, title: "Detach"){ Action in
                 self.selectedRows.append(indexPath.row)
                 for row in self.selectedRows {
                     try! self.realm.write {
-                        self.realm.objectForPrimaryKey(Expense.self, key: self.expenseList[row].id)!.reportID = ""
+                        self.realm.object(ofType: Expense.self, forPrimaryKey: self.expenseList[row].id)!.reportID = ""
                     }
                 }
                 self.deselectAll()
@@ -374,17 +374,17 @@ class ReportDetailTableViewController: UITableViewController {
     // MARK: - Navigation
     //-------------------
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "didSelectExpenseSegue" {
-            let destVC = segue.destinationViewController as! NewExpenseTableViewController
-            destVC.selectedExpense = self.realm.objectForPrimaryKey(Expense.self, key: expenseList[selectedRow].id)
+            let destVC = segue.destination as! NewExpenseTableViewController
+            destVC.selectedExpense = self.realm.object(ofType: Expense.self, forPrimaryKey: expenseList[selectedRow].id)
         } else if segue.identifier == "addExpensesToReportSegue" {
-            let destVC = segue.destinationViewController as! IntermediateNavigationController
+            let destVC = segue.destination as! IntermediateNavigationController
             destVC.selectedItemID = selectedReport.id
         }
     }
     
-    @IBAction func unwindToReportSegue(sender: UIStoryboardSegue) {
+    @IBAction func unwindToReportSegue(_ sender: UIStoryboardSegue) {
         refreshData()
         updateBars()
     }
@@ -396,8 +396,8 @@ extension ReportDetailTableViewController: MFMailComposeViewControllerDelegate {
     func sendMail() {
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
-            self.presentViewController(mailComposeViewController, animated: true, completion: {
-                UIApplication.sharedApplication().statusBarStyle = .LightContent
+            self.present(mailComposeViewController, animated: true, completion: {
+                UIApplication.shared.statusBarStyle = .lightContent
             })
         } else {
             self.showSendMailErrorAlert()
@@ -407,11 +407,11 @@ extension ReportDetailTableViewController: MFMailComposeViewControllerDelegate {
     func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailComposeVC = MFMailComposeViewController()
         
-        mailComposeVC.navigationBar.tintColor = .whiteColor()
+        mailComposeVC.navigationBar.tintColor = .white
         
         mailComposeVC.mailComposeDelegate = self
         
-        let settings = realm.objects(Settings)[0]
+        let settings = realm.objects(Settings.self)[0]
         var recipients: [String] = []
         for recipient in settings.emailList {
             recipients.append(recipient.string)
@@ -420,46 +420,46 @@ extension ReportDetailTableViewController: MFMailComposeViewControllerDelegate {
         
         mailComposeVC.setSubject("Expense Report: \(selectedReport.name)")
         createdFileName = PDFGenerator.generatePDF(selectedReport)
-        mailComposeVC.addAttachmentData(NSData(contentsOfFile: createdFileName)!, mimeType: "application/pdf", fileName: "\(selectedReport.name).pdf")
+        mailComposeVC.addAttachmentData(try! Data(contentsOf: URL(fileURLWithPath: createdFileName)), mimeType: "application/pdf", fileName: "\(selectedReport.name).pdf")
         
         return mailComposeVC
     }
     
     func showSendMailErrorAlert() {
-        let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", preferredStyle: .Alert)
-        sendMailErrorAlert.addAction(UIAlertAction(title: "Okay", style: .Default) {
+        let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", preferredStyle: .alert)
+        sendMailErrorAlert.addAction(UIAlertAction(title: "Okay", style: .default) {
             (Action) in
-            self.navigationController?.popToRootViewControllerAnimated(true)
+            self.navigationController?.popToRootViewController(animated: true)
             })
-        self.presentViewController(sendMailErrorAlert, animated: true, completion: nil)
+        self.present(sendMailErrorAlert, animated: true, completion: nil)
     }
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         
-        if selectedReport.status == ReportStatus.Open.rawValue {
-            if result == MFMailComposeResultSent || result == MFMailComposeResultSaved{
+        if selectedReport.status == ReportStatus.open.rawValue {
+            if result == MFMailComposeResult.saved || result == MFMailComposeResult.sent {
                 try! self.realm.write {
-                    self.selectedReport.status = ReportStatus.Submitted.rawValue
+                    self.selectedReport.status = ReportStatus.submitted.rawValue
                 }
             }
         }
         do {
-            try NSFileManager.defaultManager().removeItemAtPath(createdFileName!)
+            try FileManager.default.removeItem(atPath: createdFileName!)
         } catch {
             print(error)
         }
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        controller.dismiss(animated: true, completion: nil)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }
 
 
 class TopLineView: UIView {
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetRGBFillColor(context, 0.9, 0.9, 0.9, 1.0)
-        CGContextFillRect(context, CGRect(x: 0, y: 1, width: bounds.width, height: 1))
+        context?.setFillColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
+        context?.fill(CGRect(x: 0, y: 1, width: bounds.width, height: 1))
     }
 }
 

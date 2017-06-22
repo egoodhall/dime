@@ -11,7 +11,7 @@ import RealmSwift
 
 class EmailListTableViewController: UITableViewController {
     
-    @IBAction func addRecipient(sender: UIBarButtonItem) {
+    @IBAction func addRecipient(_ sender: UIBarButtonItem) {
         presentRecipientGetEmailController(nil);
     }
 
@@ -24,9 +24,9 @@ class EmailListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Recipients"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(EmailListTableViewController.addRecipient(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(EmailListTableViewController.addRecipient(_:)))
 
-        settings = realm.objects(Settings)[0] as Settings
+        settings = realm.objects(Settings.self)[0] as Settings
         
         refreshData()
     }
@@ -37,11 +37,11 @@ class EmailListTableViewController: UITableViewController {
             recipList.append(recip.string)
         }
 
-        recipList.sortInPlace {
-            return $0.lowercaseString < $1.lowercaseString
+        recipList.sort {
+            return $0.lowercased() < $1.lowercased()
         }
-        for row in 0 ..< tableView.numberOfRowsInSection(0) {
-            tableView.deselectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true)
+        for row in 0 ..< tableView.numberOfRows(inSection: 0) {
+            tableView.deselectRow(at: IndexPath(row: row, section: 0), animated: true)
         }
     }
 
@@ -50,28 +50,28 @@ class EmailListTableViewController: UITableViewController {
     // MARK: - Table view data source
     //-------------------------------
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell!
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as UITableViewCell!
         
-        cell.textLabel?.text = recipList[indexPath.row]
+        cell?.textLabel?.text = recipList[indexPath.row]
 
-        return cell
+        return cell!
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.recipList.count
     }
 
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             for recipNum in 0 ..< settings.emailList.count {
                 if settings.emailList[recipNum].string == recipList[indexPath.row] {
                     try! realm.write {
-                        self.settings.emailList.removeAtIndex(recipNum)
+                        self.settings.emailList.remove(objectAtIndex: recipNum)
                     }
                     break
                 }
@@ -80,17 +80,17 @@ class EmailListTableViewController: UITableViewController {
         }  
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performEditingAtIndexPath(indexPath)
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
        
-        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete") { (Action) in
+        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete") { (Action) in
             self.removeStringAtIndexPath(indexPath)
         }
         
-        let editAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Edit") { (Action) in
+        let editAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit") { (Action) in
             self.performEditingAtIndexPath(indexPath)
         }
         
@@ -99,40 +99,40 @@ class EmailListTableViewController: UITableViewController {
         return [deleteAction, editAction]
     }
 
-    func performEditingAtIndexPath(indexPath: NSIndexPath) {
+    func performEditingAtIndexPath(_ indexPath: IndexPath) {
         print(self.recipList)
-        let alert = UIAlertController(title: "Recipient", message: nil, preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Recipient", message: nil, preferredStyle: .alert)
 
-        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
-            textField.keyboardType = .EmailAddress
+        alert.addTextField(configurationHandler: {(textField: UITextField!) in
+            textField.keyboardType = .emailAddress
             textField.placeholder = "Email"
             textField.text = self.recipList[indexPath.row]
         })
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel){
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel){
             (Action) in
             self.tableView.setEditing(false, animated: true)
             self.refreshData()
         })
 
-        alert.addAction(UIAlertAction(title: "Save", style: .Default) { Action in
+        alert.addAction(UIAlertAction(title: "Save", style: .default) { Action in
             self.removeStringAtIndexPath(indexPath)
 
             var textFields = alert.textFields as [UITextField]!
-            self.insertString(textFields[0].text!)
+            self.insertString((textFields?[0].text!)!)
 
             self.tableView.setEditing(false, animated: true)
         })
 
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
 
-    func removeStringAtIndexPath(indexPath: NSIndexPath){
+    func removeStringAtIndexPath(_ indexPath: IndexPath){
         try! self.realm.write {
-            self.settings.emailList.removeAtIndex(indexPath.row)
+            self.settings.emailList.remove(objectAtIndex: indexPath.row)
         }
-        self.recipList.removeAtIndex(indexPath.row)
-        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        self.recipList.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .fade)
         self.refreshData()
     }
 
@@ -140,51 +140,51 @@ class EmailListTableViewController: UITableViewController {
     // MARK: - Handling Addition of addresses
     //---------------------------------------
 
-    func insertString(string: String){
-        if let _ = string.rangeOfString("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", options: .RegularExpressionSearch)  {
+    func insertString(_ string: String){
+        if let _ = string.range(of: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", options: .regularExpression)  {
             let emailString = EmailString(string: string)
             let ind = self.recipList.insertionIndexOf(string, isOrderedBefore: {return $0 < $1})
             try! self.realm.write {
-                self.settings.emailList.insert(emailString, atIndex: ind)
+                self.settings.emailList.insert(emailString, at: ind)
             }
-            self.recipList.insert(string, atIndex: ind)
-            self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: ind, inSection: 0)], withRowAnimation: .Fade)
+            self.recipList.insert(string, at: ind)
+            self.tableView.insertRows(at: [IndexPath(row: ind, section: 0)], with: .fade)
             self.refreshData()
         } else {
             presentRecipientGetEmailFailedController(string)
         }
     }
 
-    func presentRecipientGetEmailFailedController(string: String) {
-        let alert = UIAlertController(title: "Recipient", message: "'\(string)'\nIs not a valid email address.", preferredStyle: .Alert)
+    func presentRecipientGetEmailFailedController(_ string: String) {
+        let alert = UIAlertController(title: "Recipient", message: "'\(string)'\nIs not a valid email address.", preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
-        alert.addAction(UIAlertAction(title: "Try Again", style: .Default) { Action in
+        alert.addAction(UIAlertAction(title: "Try Again", style: .default) { Action in
             self.presentRecipientGetEmailController(string)
             })
 
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
 
-    func presentRecipientGetEmailController(string: String?) {
-        let alert = UIAlertController(title: "Recipient", message: nil, preferredStyle: .Alert)
+    func presentRecipientGetEmailController(_ string: String?) {
+        let alert = UIAlertController(title: "Recipient", message: nil, preferredStyle: .alert)
 
-        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
-            textField.keyboardType = UIKeyboardType.EmailAddress
+        alert.addTextField(configurationHandler: {(textField: UITextField!) in
+            textField.keyboardType = UIKeyboardType.emailAddress
             textField.placeholder = "Email"
             if string != nil {
                 textField.text = string
             }
         })
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
-        alert.addAction(UIAlertAction(title: "Save", style: .Default) { Action in
+        alert.addAction(UIAlertAction(title: "Save", style: .default) { Action in
             var textFields = alert.textFields as [UITextField]!
-            self.insertString(textFields[0].text!)
+            self.insertString((textFields?[0].text!)!)
             })
 
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
 }

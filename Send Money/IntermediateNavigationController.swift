@@ -11,11 +11,11 @@ import UIKit
 class IntermediateNavigationController: UINavigationController {
 
     var selectedItemID: String!
-    var sender: editSender = .ExpenseTable
+    var sender: editSender = .expenseTable
 }
 
 enum editSender {
-    case ReportTable
-    case ExpenseTable
-    case None
+    case reportTable
+    case expenseTable
+    case none
 }

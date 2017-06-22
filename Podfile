@@ -7,7 +7,7 @@ target 'Send Money' do
     pod 'RazzleDazzle'
     pod 'SSBouncyButton', '~> 1.0'
     pod 'OnOffButton'
-    pod 'Material', '~> 1.0'
+    pod 'Material', '~> 2.0'
 end
 
 target 'Send MoneyTests' do

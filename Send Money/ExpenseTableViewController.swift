@@ -8,6 +8,19 @@
 
 import UIKit
 import RealmSwift
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 class ExpenseTableViewController: UITableViewController {
 
@@ -19,8 +32,8 @@ class ExpenseTableViewController: UITableViewController {
     
     - Parameter sender: The object which called the action
     */
-    @IBAction func didPressAddButton(sender: AnyObject) {
-        self.performSegueWithIdentifier("newExpenseModalSegue", sender: self)
+    @IBAction func didPressAddButton(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "newExpenseModalSegue", sender: self)
     }
 
     /**
@@ -28,7 +41,7 @@ class ExpenseTableViewController: UITableViewController {
     
     - Parameter sender: The UISegmentedControl which called the action
     */
-    @IBAction func expenseOrderControlDidChange(sender: UISegmentedControl) {
+    @IBAction func expenseOrderControlDidChange(_ sender: UISegmentedControl) {
         refreshData()
         tableView.reloadData()
     }
@@ -51,7 +64,7 @@ class ExpenseTableViewController: UITableViewController {
         tableView.rowHeight = 84
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         realm = try! Realm()
         refreshData()
         tableView.reloadData()
@@ -60,74 +73,74 @@ class ExpenseTableViewController: UITableViewController {
     /// Called to update the badges on the UITabBarController
     func updateBadges() {
         var tabBarItems = self.tabBarController?.tabBar.items as [UITabBarItem]!
-        let reports = realm.objects(Report).filter("status=\(ReportStatus.Open.rawValue)").count
-        let expenses = realm.objects(Expense).filter("reportID=''").count
+        let reports = realm.objects(Report.self).filter("status=\(ReportStatus.open.rawValue)").count
+        let expenses = realm.objects(Expense.self).filter("reportID=''").count
         if expenses == 0 {
-            tabBarItems[0].badgeValue = nil
+            tabBarItems?[0].badgeValue = nil
         } else {
-            tabBarItems[0].badgeValue = "\(expenses)"
+            tabBarItems![0].badgeValue = "\(expenses)"
         }
         if reports == 0 {
-            tabBarItems[1].badgeValue = nil
+            tabBarItems?[1].badgeValue = nil
         } else {
-            tabBarItems[1].badgeValue = "\(reports)"
+            tabBarItems![1].badgeValue = "\(reports)"
         }
     }
 
     /// Called to refresh the items in the UITableView
     func refreshData() {
         expenseList = loadUnattachedExpenses()
-        let availReports = realm.objects(Report).filter("status==\(ReportStatus.Open.rawValue)")
+        let availReports = realm.objects(Report.self).filter("status==\(ReportStatus.open.rawValue)")
         reportList = [:]
         for realmReport in availReports {
             reportList[realmReport.id] = realmReport.name
         }
-        let allExpenses = realm.objects(Expense)
+        let allExpenses = realm.objects(Expense.self)
         for key in Array(reportList.keys) {
             let expenses = allExpenses.filter("reportID='\(key)'")
             for expense in expenses {
                 expenseList.append(expense)
             }
         }
-        let df = NSDateFormatter()
-        df.dateStyle = .MediumStyle
+        let df = DateFormatter()
+        df.dateStyle = .medium
         switch (expenseOrderControl.selectedSegmentIndex) {
             case 0:
-                expenseList.sortInPlace {
-                    if df.dateFromString($0.date)!.compare(df.dateFromString($1.date)!) == .OrderedSame {
-                        if $0.vendor.lowercaseString == $1.vendor.lowercaseString {
+                expenseList.sort {
+                    if df.date(from: $0.date)!.compare(df.date(from: $1.date)!) == .orderedSame {
+                        if $0.vendor.lowercased() == $1.vendor.lowercased() {
                             if $0.cost == $1.cost {
                                 return self.reportList[$0.reportID] < self.reportList[$1.reportID]
                             }
                             return $0.cost > $1.cost
                         }
-                        return $0.vendor.lowercaseString < $1.vendor.lowercaseString
+                        return $0.vendor.lowercased() < $1.vendor.lowercased()
                     }
-                    return df.dateFromString($0.date)!.compare(df.dateFromString($1.date)!) == .OrderedDescending
+                    return df.date(from: $0.date)!.compare(df.date(from: $1.date)!) == .orderedDescending
                 }
             case 1:
-                expenseList.sortInPlace {
-                    if $0.vendor.lowercaseString == $1.vendor.lowercaseString {
+                expenseList.sort {
+                    if $0.vendor.lowercased() == $1.vendor.lowercased() {
                         if self.reportList[$0.reportID] == self.reportList[$1.reportID] {
-                            if df.dateFromString($0.date)!.compare(df.dateFromString($1.date)!) == .OrderedSame {
+                            if df.date(from: $0.date)!.compare(df.date(from: $1.date)!) == .orderedSame {
                                 return $0.cost > $1.cost
                             }
-                            return df.dateFromString($0.date)!.compare(df.dateFromString($1.date)!) == .OrderedDescending
+                            return df.date(from: $0.date)!.compare(df.date(from: $1.date)!) == .orderedDescending
                         }
                         return self.reportList[$0.reportID] < self.reportList[$1.reportID]
                     }
-                    return $0.vendor.lowercaseString < $1.vendor.lowercaseString
+                    return $0.vendor.lowercased() < $1.vendor.lowercased()
                 }
             case 2:
-                expenseList.sortInPlace {
+                expenseList.sort {
                     if self.reportList[$0.reportID] == self.reportList[$1.reportID] {
-                        if $0.vendor.lowercaseString == $1.vendor.lowercaseString {
-                            if df.dateFromString($0.date)!.compare(df.dateFromString($1.date)!) == .OrderedSame {
+                        if $0.vendor.lowercased() == $1.vendor.lowercased() {
+                            if df.date(from: $0.date)!.compare(df.date(from: $1.date)!) == .orderedSame {
                                 return $0.cost > $1.cost
                             }
-                            return df.dateFromString($0.date)!.compare(df.dateFromString($1.date)!) == .OrderedDescending
+                            return df.date(from: $0.date)!.compare(df.date(from: $1.date)!) == .orderedDescending
                         }
-                        return $0.vendor.lowercaseString < $1.vendor.lowercaseString
+                        return $0.vendor.lowercased() < $1.vendor.lowercased()
                     }
                     return self.reportList[$0.reportID] < self.reportList[$1.reportID]
                 }
@@ -143,7 +156,7 @@ class ExpenseTableViewController: UITableViewController {
     :returns: [Expense]
     */
     func loadUnattachedExpenses() -> [Expense] {
-        let unattachedExpenses = realm.objects(Expense).filter("reportID = ''")
+        let unattachedExpenses = realm.objects(Expense.self).filter("reportID = ''")
         var expenses: [Expense] = []
         for expense in unattachedExpenses {
             expenses.append(expense)
@@ -156,22 +169,22 @@ class ExpenseTableViewController: UITableViewController {
     // MARK: - TableView DataSource
     //-----------------------------
 
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if(self.tableView.respondsToSelector(Selector("setSeparatorInset:"))){
-            self.tableView.separatorInset = UIEdgeInsetsZero
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if(self.tableView.responds(to: #selector(setter: UITableViewCell.separatorInset))){
+            self.tableView.separatorInset = UIEdgeInsets.zero
         }
         
-        if(self.tableView.respondsToSelector(Selector("setLayoutMargins:"))){
-            self.tableView.layoutMargins = UIEdgeInsetsZero
+        if(self.tableView.responds(to: #selector(setter: UIView.layoutMargins))){
+            self.tableView.layoutMargins = UIEdgeInsets.zero
         }
         
-        if(cell.respondsToSelector(Selector("setLayoutMargins:"))){
-            cell.layoutMargins = UIEdgeInsetsZero
+        if(cell.responds(to: #selector(setter: UIView.layoutMargins))){
+            cell.layoutMargins = UIEdgeInsets.zero
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CustomExpenseCell", forIndexPath: indexPath) as! CustomExpenseViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomExpenseCell", for: indexPath) as! CustomExpenseViewCell
         
         let expense = expenseList[indexPath.row]
         
@@ -179,16 +192,16 @@ class ExpenseTableViewController: UITableViewController {
         cell.dateLabel.text = expense.date
         if reportList[expense.reportID] != nil {
             cell.reportLabel.text = "'\(reportList[expense.reportID]!)'"
-            cell.vendorLabel.textColor = .darkGrayColor()
+            cell.vendorLabel.textColor = .darkGray
         } else {
             cell.reportLabel.text = "Unreported"
-            cell.vendorLabel.textColor = .darkTextColor()
-            cell.backgroundColor = .whiteColor()
+            cell.vendorLabel.textColor = .darkText
+            cell.backgroundColor = .white
         }
         cell.costLabel.text = expense.cost
         cell.costLabel.textColor = .accentBlueColor()
-        if expense.imageData.length != 0 {
-            cell.expenseImage.image = UIImage(data: expense.imageData)
+        if expense.imageData.count != 0 {
+            cell.expenseImage.image = UIImage(data: expense.imageData as Data)
         } else {
             cell.expenseImage.image = UIImage(named: "addPhoto.png")
         }
@@ -196,38 +209,38 @@ class ExpenseTableViewController: UITableViewController {
         return cell
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
         if expenseList.count == 0 {
             messageLabel.text = "Tap '+' to create an Expense"
         }
-        messageLabel.textColor = .lightGrayColor()
+        messageLabel.textColor = .lightGray
         messageLabel.numberOfLines = 0
-        messageLabel.textAlignment = NSTextAlignment.Center
-        messageLabel.font = UIFont.systemFontOfSize(20)
+        messageLabel.textAlignment = NSTextAlignment.center
+        messageLabel.font = UIFont.systemFont(ofSize: 20)
         messageLabel.sizeToFit()
         self.tableView.backgroundView = messageLabel;
         return expenseList.count
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedItemID = expenseList[indexPath.row].id
-        self.performSegueWithIdentifier("editExpenseSegue", sender: self)
+        self.performSegue(withIdentifier: "editExpenseSegue", sender: self)
     }
 
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
-            case .Delete:
-                let delExpense = self.realm.objectForPrimaryKey(Expense.self, key: self.expenseList[indexPath.row].id)
+            case .delete:
+                let delExpense = self.realm.object(ofType: Expense.self, forPrimaryKey: self.expenseList[indexPath.row].id)
                 try! realm.write {
                     self.realm.delete(delExpense!)
                 }
                 refreshData()
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
             default:
                 break
         }
@@ -238,19 +251,19 @@ class ExpenseTableViewController: UITableViewController {
     // MARK: - Navigation
     //-------------------
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editExpenseSegue" {
-            let destVC = segue.destinationViewController as! NewExpenseTableViewController
-            destVC.selectedExpense = realm.objectForPrimaryKey(Expense.self, key: selectedItemID)
+            let destVC = segue.destination as! NewExpenseTableViewController
+            destVC.selectedExpense = realm.object(ofType: Expense.self, forPrimaryKey: selectedItemID)
             destVC.hidesBottomBarWhenPushed = true
         }
     }
     
-    @IBAction func saveExpenseSegue(sender: UIStoryboardSegue) {
+    @IBAction func saveExpenseSegue(_ sender: UIStoryboardSegue) {
         self.refreshData()
     }
     
-    @IBAction func cancelExpenseSegue(sender: UIStoryboardSegue){
+    @IBAction func cancelExpenseSegue(_ sender: UIStoryboardSegue){
     }
 }
 
